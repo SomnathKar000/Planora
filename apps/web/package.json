@@ -12,8 +12,11 @@
   "dependencies": {
     "@lucide/vue": "^1.55.0",
     "@planora/domain": "*",
+    "@planora/layout-engine": "*",
     "@planora/shared-types": "*",
+    "@types/three": "^0.186.0",
     "pinia": "^3.0.0",
+    "three": "^0.186.1",
     "vue": "^3.5.42",
     "vue-router": "^4.5.0"
   },

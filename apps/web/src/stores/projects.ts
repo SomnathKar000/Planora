@@ -226,6 +226,21 @@ export const useProjectsStore = defineStore('projects', () => {
     projects.value.unshift(newProject);
   }
 
+  function addProject(project: Project) {
+    projects.value.unshift(project);
+  }
+
+  function updateProject(id: string, updates: Partial<Project>) {
+    const idx = projects.value.findIndex((p) => p.id === id);
+    if (idx !== -1) {
+      projects.value[idx] = {
+        ...projects.value[idx],
+        ...updates,
+        updatedAt: new Date().toISOString(),
+      };
+    }
+  }
+
   return {
     projects,
     searchQuery,
@@ -236,5 +251,7 @@ export const useProjectsStore = defineStore('projects', () => {
     getProject,
     deleteProject,
     duplicateProject,
+    addProject,
+    updateProject,
   };
 });

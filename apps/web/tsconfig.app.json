@@ -8,6 +8,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@planora/domain": ["../../packages/domain/src/index.ts"],
+      "@planora/layout-engine": ["../../packages/layout-engine/src/index.ts"],
       "@planora/shared-types": ["../../packages/shared-types/src/index.ts"]
     },
 

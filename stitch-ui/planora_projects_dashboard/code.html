@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary-fixed": "#00174a",
+          "surface-tint": "#0054d8",
+          "on-surface-variant": "#424655",
+          "primary-fixed-dim": "#b3c5ff",
+          "tertiary-fixed": "#c9e6ff",
+          "on-tertiary-fixed": "#001e2f",
+          "on-background": "#121b2e",
+          "error": "#ba1a1a",
+          "on-surface": "#121b2e",
+          "secondary-fixed": "#d3e4fe",
+          "secondary-container": "#d0e1fb",
+          "tertiary-container": "#007db2",
+          "inverse-on-surface": "#edf0ff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary": "#ffffff",
+          "surface": "#f9f9ff",
+          "surface-bright": "#f9f9ff",
+          "on-error": "#ffffff",
+          "outline-variant": "#c2c6d8",
+          "primary": "#0052d6",
+          "error-container": "#ffdad6",
+          "surface-dim": "#d1daf4",
+          "surface-container-low": "#f1f3ff",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-container": "#e9edff",
+          "surface-variant": "#d9e2fc",
+          "outline": "#737687",
+          "primary-fixed": "#dbe1ff",
+          "surface-container-highest": "#d9e2fc",
+          "inverse-surface": "#273044",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary": "#ffffff",
+          "tertiary-fixed-dim": "#89ceff",
+          "on-primary-fixed-variant": "#003ea6",
+          "surface-container-high": "#e1e8ff",
+          "background": "#f9f9ff",
+          "tertiary": "#00638e",
+          "on-tertiary-fixed-variant": "#004c6e",
+          "on-primary-container": "#fffeff",
+          "on-error-container": "#93000a",
+          "secondary": "#505f76",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-secondary-fixed": "#0b1c30",
+          "inverse-primary": "#b3c5ff",
+          "on-tertiary-container": "#fffeff",
+          "on-primary": "#ffffff",
+          "primary-container": "#246bfd"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xl": "2rem",
+          "space-xs": "0.25rem",
+          "space-lg": "1.5rem",
+          "gutter": "1.25rem",
+          "space-sm": "0.5rem",
+          "margin": "1.5rem",
+          "space-md": "1rem"
+        },
+        "fontFamily": {
+          "body-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "body-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "label-md": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-xl": [
+            "Plus Jakarta Sans"
+          ],
+          "caption-xs": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "body-md": [
+            "Plus Jakarta Sans"
+          ],
+          "title-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "label-sm": [
+            "Plus Jakarta Sans"
+          ]
+        },
+        "fontSize": {
+          "body-lg": [
+            "15px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-md": [
+            "18px",
+            {
+              "lineHeight": "26px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-xl": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "caption-xs": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "title-sm": [
+            "15px",
+            {
+              "lineHeight": "22px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-outline-variant/30 shadow-[0_1px_3px_rgba(23,32,51,0.04)]"><div class="h-14 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><img alt="Planora Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xyv3RdXNTGy23Gvvr8BMBzLgn83yQ2wZZ-WoHGlqq_xmsrIkilR0Y65R1Bn7X2qsGilB9xjEPZ1orDTwDEiy0KqpHV6829_7XSc085TiW9eypVm_gJvKl8sftr3-q3oyKCAjL4CdjmKcDFCSEouGdhogclvfR8kvLjv2nCVHJKcY_eJheOTuHKuETgaSvFol5Vpamb6f7dAzODbVJ2pLz27t2HyLjcygfPsSejrmvuN8ANMFYE9hv0CV8"/><span class="font-headline-md text-headline-md text-on-surface tracking-tight">Planora</span></div><div class="h-4 w-px bg-outline-variant/50 hidden sm:block"></div><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1 bg-surface-container-low rounded-lg text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-primary">architecture</span><span class="font-label-md text-label-md text-on-surface truncate max-w-[220px]">Downtown Loft Apt. 4B</span><span class="text-outline-variant font-caption-xs text-caption-xs">(30 × 20 ft)</span></div></div><nav class="flex items-center bg-surface-container-low p-1 rounded-xl" data-active-classes="bg-surface-container text-primary font-label-md text-label-md rounded-lg"><a class="px-space-md py-1.5 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" data-path="design-workspace" href="#">Design</a><a class="px-space-md py-1.5 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" data-path="inspiration-gallery" href="#">Inspiration</a><a class="px-space-md py-1.5 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" data-path="saved-projects" href="#">Saved</a></nav><div class="flex items-center gap-space-sm"><button class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Help &amp; Shortcuts" type="button"><span class="material-symbols-outlined text-[20px]">help</span></button><button class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors relative" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary"></span></button><div class="h-4 w-px bg-outline-variant/50 hidden md:block"></div><button class="hidden md:inline-flex items-center gap-space-xs px-space-md py-1.5 bg-primary-container text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[18px]">ios_share</span><span>Export</span></button><div class="flex items-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACOaLJepaBSiBCFHBNkzoxwU339OX_2P7ioJPen8efMX3Gar5-83GDQNpP3f0I2GP3N-7RZXqb6gP3hfI1P5Gj-Ara2gXQ8iL3UbjIwvSsLRqauGQAFE77-O1p3BhuEzmkRCrOdB1lWj4_XaEmB4DUqocPKYLaP8CrWHZOV5TtwH1IdDENSJI_wTXTGq6kjcJ4_J4DsiXem3ff29ggGWc6ybb6yaGxvytGspNCCHYJ1JOugsXIS93h7A"/></div></div></div></header><main class="w-full pt-14 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive Dashboard Container -->
+<div class="w-full max-w-[1520px] mx-auto px-gutter py-space-lg flex flex-col gap-space-xl">
+<!-- Top Banner / User Welcome Area -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-xl shadow-sm">
+<div class="absolute -right-16 -top-24 w-96 h-96 rounded-full bg-primary-fixed/30 blur-3xl pointer-events-none"></div>
+<div class="absolute right-1/3 -bottom-20 w-64 h-64 rounded-full bg-secondary-fixed/40 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-fixed text-primary font-caption-xs text-caption-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              Planora CAD Core v4.2 Active
+            </span>
+<span class="font-caption-xs text-caption-xs text-outline">Cloud Sync Real-Time</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight mt-1">
+            Welcome back, Sarah
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+            Pick up where you left off or instantiate a new generative architectural layout with AI-guided spatial constraints.
+          </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">upload_file</span>
+<span>Import CAD / DWG</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">grid_view</span>
+<span>Browse Templates</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md transition-all shadow-md" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span>+ New Project</span>
+</button>
+</div>
+</div>
+<!-- Quick Metrics Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md mt-space-xl pt-space-lg bg-surface-container-low/60 rounded-xl p-space-md">
+<div class="flex items-center gap-space-md p-space-sm rounded-lg bg-surface-container-lowest">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed/50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">apartment</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption-xs text-caption-xs text-outline uppercase tracking-wider">Active Projects</span>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">12</span>
+<span class="font-caption-xs text-caption-xs text-primary font-semibold">+2 this week</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md p-space-sm rounded-lg bg-surface-container-lowest">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed/50 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">timer</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption-xs text-caption-xs text-outline uppercase tracking-wider">Drafting Time Saved</span>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">48.5</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">hrs</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md p-space-sm rounded-lg bg-surface-container-lowest">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed/60 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">cloud_sync</span>
+</div>
+<div class="flex flex-col min-w-0 w-full pr-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-caption-xs text-caption-xs text-outline uppercase tracking-wider">Storage</span>
+<span class="font-caption-xs text-caption-xs text-on-surface-variant font-medium">1.4 / 25 GB</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mt-1.5">
+<div class="bg-primary h-full rounded-full" style="width: 18%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md p-space-sm rounded-lg bg-surface-container-lowest">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[22px]">precision_manufacturing</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-caption-xs text-caption-xs text-outline uppercase tracking-wider">AI Floor Engine</span>
+<div class="flex items-center gap-1.5">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">CAD Core</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption-xs text-caption-xs">v4.2</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter, Search, and View Bar -->
+<div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1 max-w-lg">
+<span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="w-full h-11 pl-10 pr-space-md bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-md rounded-xl focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" placeholder="Search projects by name, address, tag or dimension..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+<kbd class="px-1.5 py-0.5 rounded bg-surface-container-low text-outline font-caption-xs text-caption-xs">⌘K</kbd>
+</div>
+</div>
+<!-- Category Filter Pills and View Controls -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="flex items-center bg-surface-container-lowest p-1 rounded-xl shadow-sm overflow-x-auto">
+<button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md whitespace-nowrap shadow-xs" type="button">
+            All Projects (12)
+          </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" type="button">
+            Apartments (6)
+          </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" type="button">
+            Single Family (4)
+          </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" type="button">
+            Commercial &amp; Studio (2)
+          </button>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-1 rounded-xl shadow-sm">
+<button class="w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container text-primary shadow-xs" title="Grid View" type="button">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" title="List View" type="button">
+<span class="material-symbols-outlined text-[20px]">view_list</span>
+</button>
+</div>
+<div class="relative">
+<button class="h-11 px-space-md inline-flex items-center gap-space-xs bg-surface-container-lowest hover:bg-surface-container-low text-on-surface rounded-xl font-label-md text-label-md shadow-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">sort</span>
+<span>Modified: Recent</span>
+<span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Project Cards Grid -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Active Workspaces</h2>
+<span class="font-caption-xs text-caption-xs text-outline">Showing 6 of 12 spatial drafts</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- Card 1: Downtown Loft Apt. 4B (Active workspace) -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+<!-- Thumbnail Pair: 2D plan + 3D Render -->
+<div class="relative h-60 w-full bg-surface-container-low overflow-hidden">
+<div class="grid grid-cols-2 h-full w-full">
+<!-- Top-Down 2D Architectural Layout -->
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Top down architectural 2D floor plan layout of a 600 square foot modern loft apartment showing crisp cad walls, labeled living room, bedroom, open kitchen, and bathroom with clean wood parquet texture and precise dimension indicators on clean white backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz98sUsOsgbqTR75xDT7gfPj3uK8gC5gMCxs5LctNZIQCaP6esEl8DEI1xAhN7ey5olXjqNoRZ09PLd5WnIOw7UKwQeov4eBGORCQLKC4hv7RLAA2y6c-aOjjtmctV3CuEmvw-Brc8JiQ82ZfSGBjw1vmzH3AppLn8PMd5c9Fo-bPqNoVIn6pHf4djwjLPy65ldPiclYEATVvUKnTRCV923GijP1uezQgVo6xXM8NXdyxEHnXngKRSmw"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">2D CAD</span>
+</div>
+<!-- Mini Isometric 3D Preview -->
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Isometric photorealistic 3D cutaway perspective render of a bright modern apartment interior with living room furniture, scandinavian sofa, oak dining table, tiled bathroom, and ambient daylight casting soft natural shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2dBN9gFxglYXhyeJ65D2I7gxC9q3NljmrTMdirEaykP4nv484Olm_a-FxkJGwCMg2F2ssQvg25T8DU0bte1A-Zrp2AyALGeKQjrvrTuin1DpRqed3A34-sKW3UbfamOnDa9RCez91oOD6v8xrNNji7j-0fc9eQoBhxwZRJq5fybqyD8Vb1Yee7Pdo0Pc78gB460AyOXEO3sIhbdYPSrB8Xkv9NYk6DIkQPoQLDqkGaS3lidJc2D55RA"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">3D Isometric</span>
+</div>
+</div>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-container text-on-primary font-caption-xs text-caption-xs font-semibold shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary animate-ping"></span>
+              In Progress
+            </div>
+<div class="absolute top-3 right-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Duplicate" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Export CAD" type="button">
+<span class="material-symbols-outlined text-[16px]">ios_share</span>
+</button>
+</div>
+</div>
+<!-- Card Content Body -->
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+                  Downtown Loft Apt. 4B
+                </h3>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption-xs text-caption-xs font-medium">Modern</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+                30 × 20 ft <span class="mx-1">•</span> 600 sq ft <span class="mx-1">•</span> 1 Bed, 1 Bath
+              </p>
+</div>
+<div class="pt-space-md flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption-xs text-caption-xs">
+<span class="material-symbols-outlined text-[15px] text-primary">schedule</span>
+<span>Edited 4 mins ago</span>
+</div>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary-fixed hover:bg-primary-fixed/80 text-primary font-label-sm text-label-sm transition-colors" href="#">
+<span>Open in CAD</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Card 2: Pacific Heights Penthouse -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-60 w-full bg-surface-container-low overflow-hidden">
+<div class="grid grid-cols-2 h-full w-full">
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Technical CAD floor blueprint of a spacious penthouse apartment showing 3 bedrooms, 2.5 bathrooms, large kitchen island, open balcony deck, and minimalist architectural wall symbols." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs31qZPbH34bH53qaRtSuCA0Z8IJ-F3rcvhgwyW5Q5S0ZAFHGdueKz-glIkSoC7S0MrST6C2DMza4rz5qSIvaSdKE7SqVIU8BJKsaZecxLPBJPicncL54-VeyrBmLZkE-QUEk-1blz_OXnbwckHnKF6IH_NWm-4-t7n4GptIPsMX1mhwyyo-YPmc6HFR0eOh85AxZZklyWgsHSfuO7YUhKeVv-uE2dO_-uVP8B5e52A5eLz5uTSXE2jw"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">2D CAD</span>
+</div>
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Warm modern isometric architectural render of a luxury penthouse interior with marble kitchen countertops, floor-to-ceiling glass patio windows, and sleek lighting fixtures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3ONgd2k6CxQWTFJKip9VzVTxRSQR_najexNqbee9AetBw9aHaOEEuVomeNVfGc3G8VDfvXiW9tZ0_z7aTmT7-54QyJN3qVlawYKA5NQwt2caJjhAt9RrdWJ8hJjG_tAaRY-3o3CCNhpHaiaPDGxdT01KNabwbH5rD85LcGxCWExqv3dO8DTpDxJVFwczHezqKNv2bTY2YA19-4iMZmSFWatniVmY0FaRdL-jH9-7glMKMlLlCX0THdA"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">3D Isometric</span>
+</div>
+</div>
+<div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-xs text-on-surface font-caption-xs text-caption-xs font-semibold shadow-xs">
+              Client Review
+            </div>
+<div class="absolute top-3 right-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Duplicate" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Export CAD" type="button">
+<span class="material-symbols-outlined text-[16px]">ios_share</span>
+</button>
+</div>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+                  Pacific Heights Penthouse
+                </h3>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption-xs text-caption-xs font-medium">Minimal</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+                45 × 32 ft <span class="mx-1">•</span> 1,440 sq ft <span class="mx-1">•</span> 3 Bed, 2.5 Bath
+              </p>
+</div>
+<div class="pt-space-md flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption-xs text-caption-xs">
+<span class="material-symbols-outlined text-[15px] text-outline">schedule</span>
+<span>Edited 2 hours ago</span>
+</div>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" href="#">
+<span>Open in CAD</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Card 3: Oakland Modernist ADU -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-60 w-full bg-surface-container-low overflow-hidden">
+<div class="grid grid-cols-2 h-full w-full">
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Architectural top-view CAD blueprint of an efficient 432 sq ft accessory dwelling unit ADU with compact bedroom, bathroom, combined kitchenette and living space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE2Qr8SPNe88rZ3a8J3p4eYamABQzu7PI6lTRdO8xl633E1ksZAoGDkblxK9EKdcIgkRZicAXVKm73qCOrrkdi-IefnoENn4EGGybIZT4xpuHwi3tz6RFjxY1P2XHLn9Rw0gTDCsOO7Ei2HkoVp2SwSCdcLZc8JnTZuZUOk9JSpFCa0XxByL68i-ee68Ippvdyo-rPXAL1YzMYoRSC6FNauyaTdyYVePBYWYfk-O3Gh6q3E61bA3B_Mw"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">2D CAD</span>
+</div>
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Isometric perspective cutaway interior render of a compact modern timber ADU cabin with warm blonde wood finishes, built-in storage bench, and minimalist scandinavian furniture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEA5YkfIzkWm49qvz_buEO6PuEztT0fY0megwF_PQCyy0-AQeJhwHbzJSzUJk3gM032oaMTALPUy3dgj5_pm0BEnF77fjrI7czAgA635H_jkh8Inr_QuQFm-g8J2k4sN3_S1J_U8HRr4Kd-qmhW4C2e-0X6BOGcj6VIIqk9847ln5xaqz0NujiHVcJl2ti6AJVa7jzMGf1IouklRhB0fQ_tlwgcuhnyevJRJmYeLEFVtoQo1Xv4y9Vfw"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">3D Isometric</span>
+</div>
+</div>
+<div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-xs text-on-surface font-caption-xs text-caption-xs font-semibold shadow-xs">
+              Approved
+            </div>
+<div class="absolute top-3 right-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Duplicate" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Export CAD" type="button">
+<span class="material-symbols-outlined text-[16px]">ios_share</span>
+</button>
+</div>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+                  Oakland Modernist ADU
+                </h3>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption-xs text-caption-xs font-medium">Nordic</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+                24 × 18 ft <span class="mx-1">•</span> 432 sq ft <span class="mx-1">•</span> 1 Bed, 1 Bath
+              </p>
+</div>
+<div class="pt-space-md flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption-xs text-caption-xs">
+<span class="material-symbols-outlined text-[15px] text-outline">schedule</span>
+<span>Edited yesterday</span>
+</div>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" href="#">
+<span>Open in CAD</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Card 4: Soma Creative Studio Suite -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-60 w-full bg-surface-container-low overflow-hidden">
+<div class="grid grid-cols-2 h-full w-full">
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Overhead CAD drawing of an industrial creative workspace studio showing open desk layouts, conference room pod, coffee bar lounge, and concrete pillar grid." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHJK4Aou3F6tU7F-au3woWr1CnFk0aB9GW38DkahbulXX63xv6u8rnGJrRJ5DmUsrah_2MbTKOQZB04I7PXnpok-DA--oBefBldQT044gveBxLCt3P-q53yHTsJjpKSw_kedWz7rRd9S9k-u2KBQ40k7-78hDYyUpAlw4TrKKSLr1cIlTIsaHHLX4ZCWChVnz2avDm8kmtfE6qSTUe85nhxcMxeKPnjPYMBlCVJ49rfLCZCtjLRiXdPQ"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">2D CAD</span>
+</div>
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Industrial chic 3D isometric cutaway view of an open loft office with exposed brickwork, black steel structural beams, modern designer task lighting, and indoor plants." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPngeUER1GtwOCShvxWA5GJk71H_8rrMghzCL34xWWvao8_B4iRAqAjt3Bea6D27PJJkS_pQZrUc15vRp5EEKW9E2TYLGcHmpOvNJ904_F25ePZV24z4uCyReKAnYxUqPDRn4oRyvb_zjKySxCC7wvVlYiMj941vYfW-B9a03ZGZsgLq-vYxH6az7BRqq23bh-ZEXDy63WBittcTZmLp73DseRcAtH6QqSmJc1gutbXGEwxYcxh-UsyQ"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">3D Isometric</span>
+</div>
+</div>
+<div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-xs text-on-surface font-caption-xs text-caption-xs font-semibold shadow-xs">
+              Draft
+            </div>
+<div class="absolute top-3 right-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Duplicate" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Export CAD" type="button">
+<span class="material-symbols-outlined text-[16px]">ios_share</span>
+</button>
+</div>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+                  Soma Creative Studio Suite
+                </h3>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption-xs text-caption-xs font-medium">Industrial</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+                36 × 28 ft <span class="mx-1">•</span> 1,008 sq ft <span class="mx-1">•</span> Open Studio Space
+              </p>
+</div>
+<div class="pt-space-md flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption-xs text-caption-xs">
+<span class="material-symbols-outlined text-[15px] text-outline">schedule</span>
+<span>Edited 3 days ago</span>
+</div>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" href="#">
+<span>Open in CAD</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Card 5: Sunset District Duplex Unit A -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-60 w-full bg-surface-container-low overflow-hidden">
+<div class="grid grid-cols-2 h-full w-full">
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Precision architectural top-down CAD drafting of a two-bedroom residential duplex unit with kitchen, dining area, front porch threshold, and labeled room dimensions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbScJtPNJLhlfqTOK8DC64JcAIKyjqC2oVZ22qtQ018nkX6yQ7q4n3R9h82o2-5vDxCIn-qHOcKXl0-BjrtzO2-qgiLR44KrE62HayjOl-5Dg3HOTUGII1MyZbNri1WIDDFue8FPtXgmZN8IZorEv5T9ocKZFifjgQy5F3IlIPXo2rayagdydg6t9IR36b2IdbXf3nYV-HYUlJEiQDH6swHYJUTmffzmOiR8eJykFfKD5PQWmpclLTnA"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">2D CAD</span>
+</div>
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Cozy contemporary isometric 3D render of a two bedroom apartment unit with warm earth tone interior fabrics, light oak flooring, and comfortable living room setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQuWzGlFmkRY40Xk6ev_kmyWTDq0TzkCktQhvBlPA_K6iyOTuh7enXEd1NnT2FbZVmB2zt3r9r_liBveBgePMHHmA8YJaA8I1tMSuhMevOofP1nTVTvGxzL8NEqDrrJAYFc4veZ6QXCOW8r-pOOYRtgBmdgpUKfQcU7JOhg-iUYeU1NFpY3h9q2PHsMqwuU65DzOHRBirhPs7DVJofXewf-a_SQNu_3D7M2j67hY5oHE0KW7-jE7tYBw"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">3D Isometric</span>
+</div>
+</div>
+<div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-xs text-on-surface font-caption-xs text-caption-xs font-semibold shadow-xs">
+              Staging Ready
+            </div>
+<div class="absolute top-3 right-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Duplicate" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Export CAD" type="button">
+<span class="material-symbols-outlined text-[16px]">ios_share</span>
+</button>
+</div>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+                  Sunset District Duplex Unit A
+                </h3>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption-xs text-caption-xs font-medium">Classic</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+                28 × 22 ft <span class="mx-1">•</span> 616 sq ft <span class="mx-1">•</span> 2 Bed, 1 Bath
+              </p>
+</div>
+<div class="pt-space-md flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption-xs text-caption-xs">
+<span class="material-symbols-outlined text-[15px] text-outline">schedule</span>
+<span>Edited 5 days ago</span>
+</div>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" href="#">
+<span>Open in CAD</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Card 6: Mission District Townhouse -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-60 w-full bg-surface-container-low overflow-hidden">
+<div class="grid grid-cols-2 h-full w-full">
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Detailed CAD layout blueprint of a multistory townhouse ground floor showcasing an open concept chef kitchen, guest suite, central stairwell, and garden atrium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmu5LrNZmSguvqO8canfhJGbFxfDwOJisvsOQ4ECI_RP-KcFJYJEpoYXwV9b7asbc8Cm4-WZvF2S1oy_0O32YK_fOXq75CnyExBOWQ2sSfruICl9uzVBzIHhQ_T0tHHfsOq20hgMCR2HhoC_uYFiQxuBzZQG3wfHWrjM4gjcNfocUbcvTYrjTp6XE3eY4Wyi0rgg8fGqrcHaqkDMmdyQzwx-Z55FxeqXKtojWZnh0gZFIzoc8lH7QxDA"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">2D CAD</span>
+</div>
+<div class="relative h-full w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Isometric perspective cutaway interior render of a multi-level contemporary townhouse featuring architectural steel staircase, indoor olive tree planter, and designer furniture in neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu0fjIRfqdzwyWuXrKbR3VOt61Unp8nhftLPMSDPgUaDkalNCZgL5yuucPJaSwxxO2lRL_2yvBdWNvo36Rq_R80CIZOpYHOOwutKKkDAM2lrOLHazYJ2hDUn6T1wN50F3Fk9-zMKTkrXNY0nxj82fDea8VE7DjOssgDuQdKRV4eXOQYuRo5QsbmvR47kddusQORgmrbZE7P4MWxYOQ6A7F1AXd5FBiVNxn1U-scFLaShBYW-Arf7Yguw"/>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-caption-xs text-caption-xs text-on-surface backdrop-blur-xs font-semibold">3D Isometric</span>
+</div>
+</div>
+<div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-xs text-on-surface font-caption-xs text-caption-xs font-semibold shadow-xs">
+              Complete
+            </div>
+<div class="absolute top-3 right-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Duplicate" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface hover:text-primary flex items-center justify-center shadow-md backdrop-blur-xs" title="Export CAD" type="button">
+<span class="material-symbols-outlined text-[16px]">ios_share</span>
+</button>
+</div>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+                  Mission District Townhouse
+                </h3>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption-xs text-caption-xs font-medium">Modern</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+                50 × 24 ft <span class="mx-1">•</span> 1,200 sq ft <span class="mx-1">•</span> 3 Bed, 3 Bath
+              </p>
+</div>
+<div class="pt-space-md flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-caption-xs text-caption-xs">
+<span class="material-symbols-outlined text-[15px] text-outline">schedule</span>
+<span>Edited 1 week ago</span>
+</div>
+<a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" href="#">
+<span>Open in CAD</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Architectural Template Gallery Section -->
+<div class="flex flex-col gap-space-md pt-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Proven Architectural Blueprints</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Accelerate workflow by populating validated structural floor layouts with customizable parametric parameters.</p>
+</div>
+<button class="inline-flex items-center gap-1 text-primary hover:text-on-primary-fixed-variant font-label-md text-label-md transition-colors" type="button">
+<span>Explore All 24 Templates</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Template 1 -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-space-sm">
+<!-- Architectural Vector Blueprint Illustration -->
+<svg class="w-full h-full text-primary" fill="none" stroke="currentColor" viewbox="0 0 200 150">
+<!-- Outer boundary -->
+<rect class="text-on-surface" height="110" rx="2" stroke-width="2.5" width="160" x="20" y="20"></rect>
+<!-- Interior walls -->
+<line class="text-on-surface" stroke-width="2" x1="20" x2="110" y1="80" y2="80"></line>
+<line class="text-on-surface" stroke-width="2" x1="110" x2="110" y1="80" y2="130"></line>
+<line class="text-on-surface" stroke-width="2" x1="110" x2="110" y1="20" y2="50"></line>
+<!-- Door swings -->
+<path class="text-primary" d="M110,80 A30,30 0 0,0 140,110" stroke-dasharray="2 2" stroke-width="1"></path>
+<line class="text-primary" stroke-width="1.5" x1="110" x2="140" y1="80" y2="80"></line>
+<!-- Windows -->
+<line class="text-tertiary" stroke-width="4" x1="40" x2="80" y1="20" y2="20"></line>
+<line class="text-tertiary" stroke-width="4" x1="130" x2="170" y1="130" y2="130"></line>
+<!-- Dimensions indicator -->
+<line class="text-outline" stroke-width="0.8" x1="20" x2="180" y1="10" y2="10"></line>
+<text class="text-[8px] font-mono text-outline" fill="currentColor" x="90" y="8">22 ft</text>
+</svg>
+<span class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-surface-container font-caption-xs text-caption-xs text-on-surface-variant font-medium">Compact</span>
+</div>
+<div class="flex flex-col gap-1 mt-space-md">
+<h4 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+              Studio Flat (Micro CAD)
+            </h4>
+<span class="font-caption-xs text-caption-xs text-outline">450 sq ft • 1 Bath • Efficiency Kitchen</span>
+</div>
+<button class="w-full mt-space-md py-2 px-space-md rounded-lg bg-surface-container hover:bg-primary-container hover:text-on-primary text-on-surface font-label-md text-label-md transition-all flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">add_box</span>
+<span>Use Template</span>
+</button>
+</div>
+<!-- Template 2 -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-space-sm">
+<svg class="w-full h-full text-primary" fill="none" stroke="currentColor" viewbox="0 0 200 150">
+<rect class="text-on-surface" height="120" rx="2" stroke-width="2.5" width="170" x="15" y="15"></rect>
+<!-- Split 2 Bedroom -->
+<line class="text-on-surface" stroke-width="2" x1="90" x2="90" y1="15" y2="135"></line>
+<line class="text-on-surface" stroke-width="2" x1="90" x2="185" y1="75" y2="75"></line>
+<line class="text-on-surface" stroke-width="2" x1="15" x2="60" y1="90" y2="90"></line>
+<path class="text-primary" d="M90,75 A25,25 0 0,1 115,100" stroke-dasharray="2 2" stroke-width="1"></path>
+<line class="text-primary" stroke-width="1.5" x1="90" x2="115" y1="75" y2="75"></line>
+<line class="text-tertiary" stroke-width="4" x1="30" x2="70" y1="15" y2="15"></line>
+<line class="text-tertiary" stroke-width="4" x1="110" x2="150" y1="15" y2="15"></line>
+<text class="text-[9px] font-sans text-outline" fill="currentColor" x="45" y="55">Living</text>
+<text class="text-[9px] font-sans text-outline" fill="currentColor" x="125" y="45">Bed 1</text>
+<text class="text-[9px] font-sans text-outline" fill="currentColor" x="125" y="110">Bed 2</text>
+</svg>
+<span class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-surface-container font-caption-xs text-caption-xs text-on-surface-variant font-medium">Popular</span>
+</div>
+<div class="flex flex-col gap-1 mt-space-md">
+<h4 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+              2-Bedroom Urban Flat
+            </h4>
+<span class="font-caption-xs text-caption-xs text-outline">850 sq ft • 2 Bed, 1.5 Bath • Balcony</span>
+</div>
+<button class="w-full mt-space-md py-2 px-space-md rounded-lg bg-surface-container hover:bg-primary-container hover:text-on-primary text-on-surface font-label-md text-label-md transition-all flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">add_box</span>
+<span>Use Template</span>
+</button>
+</div>
+<!-- Template 3 -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-space-sm">
+<svg class="w-full h-full text-primary" fill="none" stroke="currentColor" viewbox="0 0 200 150">
+<!-- L Shaped Suburban Base -->
+<path class="text-on-surface" d="M15,20 L185,20 L185,85 L125,85 L125,135 L15,135 Z" fill="none" stroke-width="2.5"></path>
+<line class="text-on-surface" stroke-width="2" x1="75" x2="75" y1="20" y2="85"></line>
+<line class="text-on-surface" stroke-width="2" x1="15" x2="75" y1="85" y2="85"></line>
+<line class="text-on-surface" stroke-width="2" x1="125" x2="185" y1="50" y2="50"></line>
+<path class="text-primary" d="M75,50 A20,20 0 0,1 95,70" stroke-dasharray="2 2" stroke-width="1"></path>
+<line class="text-tertiary" stroke-width="4" x1="30" x2="70" y1="135" y2="135"></line>
+<line class="text-tertiary" stroke-width="4" x1="140" x2="175" y1="20" y2="20"></line>
+<text class="text-[9px] font-sans text-outline" fill="currentColor" x="35" y="55">Primary</text>
+<text class="text-[9px] font-sans text-outline" fill="currentColor" x="95" y="115">Great Rm</text>
+</svg>
+<span class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-surface-container font-caption-xs text-caption-xs text-on-surface-variant font-medium">Family</span>
+</div>
+<div class="flex flex-col gap-1 mt-space-md">
+<h4 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+              Suburban Single-Story
+            </h4>
+<span class="font-caption-xs text-caption-xs text-outline">1,800 sq ft • 3 Bed, 2 Bath • Garage</span>
+</div>
+<button class="w-full mt-space-md py-2 px-space-md rounded-lg bg-surface-container hover:bg-primary-container hover:text-on-primary text-on-surface font-label-md text-label-md transition-all flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">add_box</span>
+<span>Use Template</span>
+</button>
+</div>
+<!-- Template 4 -->
+<div class="group flex flex-col bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-space-sm">
+<svg class="w-full h-full text-primary" fill="none" stroke="currentColor" viewbox="0 0 200 150">
+<rect class="text-on-surface" height="120" rx="2" stroke-width="2.5" width="150" x="25" y="15"></rect>
+<!-- Open Mezzanine layout with stairs -->
+<line class="text-primary" stroke-dasharray="3 3" stroke-width="1.8" x1="25" x2="110" y1="65" y2="65"></line>
+<line class="text-primary" stroke-dasharray="3 3" stroke-width="1.8" x1="110" x2="110" y1="15" y2="65"></line>
+<!-- Staircase steps -->
+<rect class="text-outline" height="35" stroke-width="1" width="30" x="115" y="25"></rect>
+<line class="text-outline" stroke-width="1" x1="115" x2="145" y1="32" y2="32"></line>
+<line class="text-outline" stroke-width="1" x1="115" x2="145" y1="39" y2="39"></line>
+<line class="text-outline" stroke-width="1" x1="115" x2="145" y1="46" y2="46"></line>
+<line class="text-outline" stroke-width="1" x1="115" x2="145" y1="53" y2="53"></line>
+<!-- High windows -->
+<line class="text-tertiary" stroke-width="4" x1="40" x2="160" y1="135" y2="135"></line>
+<text class="text-[8px] font-sans text-primary" fill="currentColor" x="45" y="45">Mezzanine</text>
+<text class="text-[9px] font-sans text-outline" fill="currentColor" x="65" y="105">Open Double-Height</text>
+</svg>
+<span class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-surface-container font-caption-xs text-caption-xs text-on-surface-variant font-medium">Loft</span>
+</div>
+<div class="flex flex-col gap-1 mt-space-md">
+<h4 class="font-headline-md text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+              Open Loft &amp; Mezzanine
+            </h4>
+<span class="font-caption-xs text-caption-xs text-outline">1,100 sq ft • High Ceiling • 1.5 Bath</span>
+</div>
+<button class="w-full mt-space-md py-2 px-space-md rounded-lg bg-surface-container hover:bg-primary-container hover:text-on-primary text-on-surface font-label-md text-label-md transition-all flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">add_box</span>
+<span>Use Template</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple interactive micro-interactions for project tags and view options
+  document.addEventListener('DOMContentLoaded', () => {
+    // Keyboard shortcut handler for search
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.querySelector('input[type="text"]');
+        if (searchInput) searchInput.focus();
+      }
+    });
+  });
+</script></main></body></html>

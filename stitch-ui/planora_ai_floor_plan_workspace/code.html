@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary-fixed": "#00174a",
+          "surface-tint": "#0054d8",
+          "on-surface-variant": "#424655",
+          "primary-fixed-dim": "#b3c5ff",
+          "tertiary-fixed": "#c9e6ff",
+          "on-tertiary-fixed": "#001e2f",
+          "on-background": "#121b2e",
+          "error": "#ba1a1a",
+          "on-surface": "#121b2e",
+          "secondary-fixed": "#d3e4fe",
+          "secondary-container": "#d0e1fb",
+          "tertiary-container": "#007db2",
+          "inverse-on-surface": "#edf0ff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary": "#ffffff",
+          "surface": "#f9f9ff",
+          "surface-bright": "#f9f9ff",
+          "on-error": "#ffffff",
+          "outline-variant": "#c2c6d8",
+          "primary": "#0052d6",
+          "error-container": "#ffdad6",
+          "surface-dim": "#d1daf4",
+          "surface-container-low": "#f1f3ff",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-container": "#e9edff",
+          "surface-variant": "#d9e2fc",
+          "outline": "#737687",
+          "primary-fixed": "#dbe1ff",
+          "surface-container-highest": "#d9e2fc",
+          "inverse-surface": "#273044",
+          "surface-container-lowest": "#ffffff",
+          "on-secondary": "#ffffff",
+          "tertiary-fixed-dim": "#89ceff",
+          "on-primary-fixed-variant": "#003ea6",
+          "surface-container-high": "#e1e8ff",
+          "background": "#f9f9ff",
+          "tertiary": "#00638e",
+          "on-tertiary-fixed-variant": "#004c6e",
+          "on-primary-container": "#fffeff",
+          "on-error-container": "#93000a",
+          "secondary": "#505f76",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-secondary-fixed": "#0b1c30",
+          "inverse-primary": "#b3c5ff",
+          "on-tertiary-container": "#fffeff",
+          "on-primary": "#ffffff",
+          "primary-container": "#246bfd"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xl": "2rem",
+          "space-xs": "0.25rem",
+          "space-lg": "1.5rem",
+          "gutter": "1.25rem",
+          "space-sm": "0.5rem",
+          "margin": "1.5rem",
+          "space-md": "1rem"
+        },
+        "fontFamily": {
+          "body-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "body-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "label-md": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-xl": [
+            "Plus Jakarta Sans"
+          ],
+          "caption-xs": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "body-md": [
+            "Plus Jakarta Sans"
+          ],
+          "title-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "label-sm": [
+            "Plus Jakarta Sans"
+          ]
+        },
+        "fontSize": {
+          "body-lg": [
+            "15px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-md": [
+            "18px",
+            {
+              "lineHeight": "26px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-xl": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "caption-xs": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "title-sm": [
+            "15px",
+            {
+              "lineHeight": "22px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-outline-variant/30 shadow-[0_1px_3px_rgba(23,32,51,0.04)]"><div class="h-14 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><img alt="Planora Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xyv3RdXNTGy23Gvvr8BMBzLgn83yQ2wZZ-WoHGlqq_xmsrIkilR0Y65R1Bn7X2qsGilB9xjEPZ1orDTwDEiy0KqpHV6829_7XSc085TiW9eypVm_gJvKl8sftr3-q3oyKCAjL4CdjmKcDFCSEouGdhogclvfR8kvLjv2nCVHJKcY_eJheOTuHKuETgaSvFol5Vpamb6f7dAzODbVJ2pLz27t2HyLjcygfPsSejrmvuN8ANMFYE9hv0CV8"/><span class="font-headline-md text-headline-md text-on-surface tracking-tight">Planora</span></div><div class="h-4 w-px bg-outline-variant/50 hidden sm:block"></div><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1 bg-surface-container-low rounded-lg text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-primary">architecture</span><span class="font-label-md text-label-md text-on-surface truncate max-w-[220px]">Downtown Loft Apt. 4B</span><span class="text-outline-variant font-caption-xs text-caption-xs">(30 × 20 ft)</span></div></div><nav class="flex items-center bg-surface-container-low p-1 rounded-xl" data-active-classes="bg-surface-container text-primary font-label-md text-label-md rounded-lg"><a aria-current="page" class="px-space-md py-1.5 transition-all bg-surface-container text-primary font-label-md text-label-md rounded-lg" data-path="design-workspace" href="#">Design</a><a class="px-space-md py-1.5 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" data-path="inspiration-gallery" href="#">Inspiration</a><a class="px-space-md py-1.5 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" data-path="saved-projects" href="#">Saved</a></nav><div class="flex items-center gap-space-sm"><button class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Help &amp; Shortcuts" type="button"><span class="material-symbols-outlined text-[20px]">help</span></button><button class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors relative" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary"></span></button><div class="h-4 w-px bg-outline-variant/50 hidden md:block"></div><button class="hidden md:inline-flex items-center gap-space-xs px-space-md py-1.5 bg-primary-container text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary transition-colors shadow-sm" type="button"><span class="material-symbols-outlined text-[18px]">ios_share</span><span>Export</span></button><div class="flex items-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACOaLJepaBSiBCFHBNkzoxwU339OX_2P7ioJPen8efMX3Gar5-83GDQNpP3f0I2GP3N-7RZXqb6gP3hfI1P5Gj-Ara2gXQ8iL3UbjIwvSsLRqauGQAFE77-O1p3BhuEzmkRCrOdB1lWj4_XaEmB4DUqocPKYLaP8CrWHZOV5TtwH1IdDENSJI_wTXTGq6kjcJ4_J4DsiXem3ff29ggGWc6ybb6yaGxvytGspNCCHYJ1JOugsXIS93h7A"/></div></div></div></header><main class="w-full pt-14 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1680px] mx-auto p-space-md lg:p-gutter">
+<!-- Top Contextual Sub-bar (CAD Project Bar & Quick Status) -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-md px-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          Live CAD Engine v4.2
+        </span>
+<span class="text-outline text-label-sm hidden sm:inline">•</span>
+<span class="font-body-sm text-body-sm text-secondary hidden sm:inline">Automatic dimension snapping enabled (1/4" precision)</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+<span>Version History (4 mins ago)</span>
+</button>
+<span class="inline-block w-px h-3.5 bg-outline-variant/50"></span>
+<span class="inline-flex items-center gap-1 text-tertiary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Synced with Cloud</span>
+</span>
+</div>
+</div>
+<!-- Main 3-Column Studio Workspace -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md xl:gap-gutter items-start">
+<!-- ========================================== -->
+<!-- COLUMN 1: LEFT CONFIGURATION & PARAMETERS  -->
+<!-- ========================================== -->
+<aside class="lg:col-span-4 xl:col-span-3 flex flex-col gap-space-md">
+<!-- CARD 1: Space Details -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center font-label-md text-label-md">1</span>
+<span>Enter Space Details</span>
+</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-caption-xs text-caption-xs text-secondary-container text-on-secondary-container">Preset</span>
+</div>
+<!-- Segmented space category -->
+<div class="grid grid-cols-3 p-1 bg-surface-container-low rounded-lg gap-1">
+<button class="py-1.5 text-center font-label-sm text-label-sm rounded-md transition-all text-on-surface-variant hover:text-on-surface" type="button">Room</button>
+<button class="py-1.5 text-center font-label-sm text-label-sm rounded-md transition-all bg-surface-container-lowest text-primary shadow-sm font-semibold" type="button">Apartment</button>
+<button class="py-1.5 text-center font-label-sm text-label-sm rounded-md transition-all text-on-surface-variant hover:text-on-surface" type="button">House</button>
+</div>
+<!-- Dimension inputs -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-secondary">Length (ft)</label>
+<div class="relative flex items-center">
+<input class="w-full h-10 px-3 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" type="number" value="30"/>
+<span class="absolute right-3 font-caption-xs text-caption-xs text-outline">FT</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-secondary">Width (ft)</label>
+<div class="relative flex items-center">
+<input class="w-full h-10 px-3 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" type="number" value="20"/>
+<span class="absolute right-3 font-caption-xs text-caption-xs text-outline">FT</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-secondary">Height (opt.)</label>
+<div class="relative flex items-center">
+<input class="w-full h-10 px-3 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" type="number" value="10"/>
+<span class="absolute right-3 font-caption-xs text-caption-xs text-outline">FT</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-secondary">Unit System</label>
+<div class="relative flex items-center">
+<select class="w-full h-10 px-3 appearance-none bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all cursor-pointer">
+<option selected="">Feet (Imperial)</option>
+<option>Meters (Metric)</option>
+</select>
+<span class="material-symbols-outlined text-[18px] text-outline pointer-events-none absolute right-2.5">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Total Gross Floor Area Meter -->
+<div class="bg-surface-container-low rounded-lg p-3 flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-semibold">Total Gross Area</span>
+<span class="text-primary font-bold">600 sq ft</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 90.6%;"></div>
+</div>
+<div class="flex items-center justify-between font-caption-xs text-caption-xs text-outline">
+<span>Allocated: 544 sq ft (90.6%)</span>
+<span class="text-tertiary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 56 sq ft circulation
+              </span>
+</div>
+</div>
+</div>
+<!-- CARD 2: Select Rooms -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center font-label-md text-label-md">2</span>
+<span>Select Rooms</span>
+</h2>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container text-primary font-label-sm text-label-sm hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add Room</span>
+</button>
+</div>
+<!-- Reorderable Room List -->
+<div class="flex flex-col gap-2">
+<!-- Living Room -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group cursor-grab">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-on-surface-variant transition-colors">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">weekend</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface">Living Room</span>
+<span class="font-caption-xs text-caption-xs text-secondary">12 × 16 ft • 192 sq ft</span>
+</div>
+</div>
+<button class="w-7 h-7 rounded-md flex items-center justify-center text-outline hover:text-error hover:bg-surface-container transition-colors" title="Remove room" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Bedroom -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group cursor-grab">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-on-surface-variant transition-colors">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">bed</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface">Bedroom</span>
+<span class="font-caption-xs text-caption-xs text-secondary">12 × 12 ft • 144 sq ft</span>
+</div>
+</div>
+<button class="w-7 h-7 rounded-md flex items-center justify-center text-outline hover:text-error hover:bg-surface-container transition-colors" title="Remove room" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Kitchen -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group cursor-grab">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-on-surface-variant transition-colors">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">soup_kitchen</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface">Kitchen</span>
+<span class="font-caption-xs text-caption-xs text-secondary">8 × 12 ft • 96 sq ft</span>
+</div>
+</div>
+<button class="w-7 h-7 rounded-md flex items-center justify-center text-outline hover:text-error hover:bg-surface-container transition-colors" title="Remove room" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Bathroom -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group cursor-grab">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-on-surface-variant transition-colors">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">bathtub</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface">Bathroom</span>
+<span class="font-caption-xs text-caption-xs text-secondary">6 × 8 ft • 48 sq ft</span>
+</div>
+</div>
+<button class="w-7 h-7 rounded-md flex items-center justify-center text-outline hover:text-error hover:bg-surface-container transition-colors" title="Remove room" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CARD 3: Design Preferences & Trigger -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center font-label-md text-label-md">3</span>
+<span>Design Preferences</span>
+</h2>
+<button class="font-label-sm text-label-sm text-primary hover:underline" type="button">View all</button>
+</div>
+<!-- Style Preset Cards (4 Columns) -->
+<div class="grid grid-cols-4 gap-2">
+<!-- Modern (Selected) -->
+<div class="flex flex-col items-center gap-1.5 cursor-pointer group">
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-surface-container ring-2 ring-primary relative shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Modern architectural living room with bright natural ambient daylight, light hardwood floors, minimal Scandinavian furniture, warm beige walls, and sleek ceiling spotlights in architectural photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCyNMZGj1FtDFqUEyqvqscZlwqw8s1aBZbjjaypgEADWhqZoJXr80p2xnGttSi8vHFa7T67jb2g8DHP020EQpiMWjwV2aUXA7t5kTHZeeyfMijf5hSBPcvzFfe0zL3WfrLcI-zXvj9wjy1A9-z3DjXkykAv5vGWW7l_n20ETQTB4Q96BoBkhZbukGX16-K4yEmftzMFiRC0hPJeVMYBEwTKhAL1sFCMtB8mr-OsFVq4rEJCmZ1VVmLEg"/>
+<span class="absolute top-1 right-1 w-4 h-4 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[11px]">check</span>
+</span>
+</div>
+<span class="font-caption-xs text-caption-xs font-semibold text-primary text-center">Modern</span>
+</div>
+<!-- Minimal -->
+<div class="flex flex-col items-center gap-1.5 cursor-pointer group">
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-surface-container relative shadow-xs opacity-85 group-hover:opacity-100 transition-opacity">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Minimalist modern interior with clean geometric shapes, muted neutral tones, low profile furniture, linen fabric textures, and peaceful soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAujXjcZXx7gR5eC66QoIr4yFeYlwFTEQU78DbLkDXP95VsqzUKD_PAxrZ78JXFM9MaXBFRwnb9fnVfUz8nwbmc8ZK3HejWG6EqokCjd-1MXs4ipgbsBzyAo-M2gln6zrG6HL7D-XTfYjExjiGArl_3eA-SGVUJ03rfi-lK47uBSqn6nt-dEsLdvLYqok7pSnVVwjbqMYZZIna348Mn1XY-OwzmMExro4KH4KqH9vIGcWZUeQonfF1VPg"/>
+</div>
+<span class="font-caption-xs text-caption-xs text-secondary text-center group-hover:text-on-surface">Minimal</span>
+</div>
+<!-- Classic -->
+<div class="flex flex-col items-center gap-1.5 cursor-pointer group">
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-surface-container relative shadow-xs opacity-85 group-hover:opacity-100 transition-opacity">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Classic transitional interior design with crown molding, subtle warm oak wainscoting, tufted sofa, antique brass floor lamps, and cozy residential ambiance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj21ZKhpfxvqDBZHDpVw7wnUoeUyVL-mKrGdgchQI2jDVptHTjXsShkqcDbjKvP523_u1k0QTEBos_SEQ91pe0xiuheap7jZtw7OD2V397e_Bad43iPpLqRYHFtgVPNN4rr7EtMN9RasotJWg39kFpwmR6Jh031f0S93h4wqfIsG-dndWp1MNEbzTeaIfFtBKfnMt_z0yDyFGy_eG0bVx9UaxL5U81X_4th52uRGezqWvc4R6ktiYZaA"/>
+</div>
+<span class="font-caption-xs text-caption-xs text-secondary text-center group-hover:text-on-surface">Classic</span>
+</div>
+<!-- Industrial -->
+<div class="flex flex-col items-center gap-1.5 cursor-pointer group">
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-surface-container relative shadow-xs opacity-85 group-hover:opacity-100 transition-opacity">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Industrial loft interior layout with exposed dark steel architectural beams, distressed brick accents, polished concrete, and black metal framed modern furniture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_yp9eTlFM_jEYNYezexyQyVQHFpQDikl1Z-1qw8zbv1kdSPPdLV7BJnMIwNxNlwSMhLk5-Oc3mfxmc4HVpYnzUQOLKv7UnsItPfqP66frNvEu0xSmwDdeEG-x2gwlKIf_HzRIBl7xuS2k7utMOW1IwruaxCeW3fusXD59DFFBjfHgG2iEPKllfsEo6cpEDZr3vDtTRPnZEguqr09A-GccMvnEOBZE2iIeZ_WakZq0MFLNom06zD3-tw"/>
+</div>
+<span class="font-caption-xs text-caption-xs text-secondary text-center group-hover:text-on-surface">Industrial</span>
+</div>
+</div>
+<!-- Color Theme Swatches -->
+<div class="flex flex-col gap-2 pt-1">
+<span class="font-label-sm text-label-sm text-secondary">Color Theme Palette</span>
+<div class="flex items-center gap-3">
+<!-- Swatch 1: Sand/Alabaster (Selected) -->
+<button class="w-7 h-7 rounded-full bg-[#EFECE6] ring-2 ring-primary ring-offset-2 transition-transform hover:scale-110 shadow-xs relative" title="Sand &amp; Natural Linen" type="button">
+<span class="sr-only">Sand Theme</span>
+</button>
+<!-- Swatch 2: Warm Taupe -->
+<button class="w-7 h-7 rounded-full bg-[#B89F82] hover:ring-2 hover:ring-outline hover:ring-offset-2 transition-transform hover:scale-110 shadow-xs" title="Warm Walnut" type="button"></button>
+<!-- Swatch 3: Sage Olive -->
+<button class="w-7 h-7 rounded-full bg-[#829983] hover:ring-2 hover:ring-outline hover:ring-offset-2 transition-transform hover:scale-110 shadow-xs" title="Nordic Sage" type="button"></button>
+<!-- Swatch 4: Slate Blue -->
+<button class="w-7 h-7 rounded-full bg-[#587B95] hover:ring-2 hover:ring-outline hover:ring-offset-2 transition-transform hover:scale-110 shadow-xs" title="Architectural Slate" type="button"></button>
+<!-- Swatch 5: Deep Charcoal -->
+<button class="w-7 h-7 rounded-full bg-[#202734] hover:ring-2 hover:ring-outline hover:ring-offset-2 transition-transform hover:scale-110 shadow-xs" title="Graphite Charcoal" type="button"></button>
+</div>
+</div>
+<!-- Density Parameter Selector -->
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-sm text-label-sm text-secondary">Furniture Density</span>
+<div class="flex items-center gap-1 bg-surface-container-low p-1 rounded-lg">
+<button class="px-2 py-0.5 rounded text-secondary hover:text-on-surface font-caption-xs text-caption-xs" type="button">Sparse</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-semibold shadow-xs font-caption-xs text-caption-xs" type="button">Balanced</button>
+<button class="px-2 py-0.5 rounded text-secondary hover:text-on-surface font-caption-xs text-caption-xs" type="button">Dense</button>
+</div>
+</div>
+<!-- Main Primary Action Trigger -->
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-[0.99] mt-2 group" type="button">
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:rotate-12">auto_awesome</span>
+<span>Generate Design</span>
+</button>
+</div>
+</aside>
+<!-- ========================================== -->
+<!-- COLUMN 2: CENTER CAD FLOOR PLAN CANVAS     -->
+<!-- ========================================== -->
+<section class="lg:col-span-8 xl:col-span-6 flex flex-col bg-surface-container-lowest rounded-xl shadow-sm relative overflow-hidden min-h-[780px]">
+<!-- Canvas Header Bar with Controls -->
+<div class="px-space-md py-space-sm bg-surface-container-lowest flex flex-wrap items-center justify-between gap-space-sm z-10 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+<!-- View switcher -->
+<div class="inline-flex p-1 bg-surface-container-low rounded-lg gap-1">
+<button class="px-3 py-1 bg-surface-container-lowest text-primary font-label-md text-label-md rounded-md shadow-xs flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">floor</span>
+<span>2D Floor Plan</span>
+</button>
+<button class="px-3 py-1 text-secondary hover:text-on-surface font-label-md text-label-md rounded-md transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">view_in_ar</span>
+<span>3D View</span>
+</button>
+<button class="px-3 py-1 text-secondary hover:text-on-surface font-label-md text-label-md rounded-md transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">directions_walk</span>
+<span>Walkthrough</span>
+</button>
+</div>
+<!-- Canvas Utility Commands -->
+<div class="flex items-center gap-1 sm:gap-2">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" title="Undo (Cmd+Z)" type="button">
+<span class="material-symbols-outlined text-[18px]">undo</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" title="Redo (Cmd+Shift+Z)" type="button">
+<span class="material-symbols-outlined text-[18px]">redo</span>
+</button>
+<span class="w-px h-4 bg-outline-variant/60 mx-0.5"></span>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">auto_fix_high</span>
+<span>Auto Arrange</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-on-surface-variant hover:bg-error-container hover:text-on-error-container font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">delete_sweep</span>
+<span class="hidden sm:inline">Clear</span>
+</button>
+<span class="w-px h-4 bg-outline-variant/60 mx-0.5 hidden sm:inline"></span>
+<button class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Download</span>
+</button>
+</div>
+</div>
+<!-- Canvas Viewport / Drafting Board Area -->
+<div class="relative flex-1 w-full bg-surface-container-lowest overflow-hidden flex items-center justify-center p-6 select-none" id="drafting-canvas-viewport">
+<!-- Subtle CAD Grid Background (SVG Pattern) -->
+<div class="absolute inset-0 pointer-events-none opacity-40">
+<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="20" id="smallGrid" patternunits="userSpaceOnUse" width="20">
+<path d="M 20 0 L 0 0 0 20" fill="none" stroke="#D1DAF4" stroke-width="0.5"></path>
+</pattern>
+<pattern height="100" id="grid" patternunits="userSpaceOnUse" width="100">
+<rect fill="url(#smallGrid)" height="100" width="100"></rect>
+<path d="M 100 0 L 0 0 0 100" fill="none" stroke="#B3C5FF" stroke-width="1"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<!-- Floor Plan Layout Group with Perimeter Dimensions -->
+<div class="relative w-full max-w-[540px] aspect-[1.45/1] my-auto">
+<!-- TOP DIMENSION ARROW (30 ft) -->
+<div class="absolute -top-7 left-0 right-0 flex items-center justify-center">
+<div class="w-full flex items-center">
+<span class="material-symbols-outlined text-[16px] text-secondary -mr-1">arrow_left</span>
+<div class="flex-1 h-px bg-secondary"></div>
+<span class="px-2 py-0.5 bg-surface-container-lowest font-label-md text-label-md font-bold text-on-surface shadow-xs rounded">30 ft</span>
+<div class="flex-1 h-px bg-secondary"></div>
+<span class="material-symbols-outlined text-[16px] text-secondary -ml-1">arrow_right</span>
+</div>
+</div>
+<!-- LEFT VERTICAL DIMENSION ARROW (20 ft) -->
+<div class="absolute -left-8 top-0 bottom-0 flex flex-col items-center justify-center">
+<div class="h-full flex flex-col items-center">
+<span class="material-symbols-outlined text-[16px] text-secondary -mb-1">arrow_drop_up</span>
+<div class="flex-1 w-px bg-secondary"></div>
+<span class="py-1 px-1 bg-surface-container-lowest font-label-md text-label-md font-bold text-on-surface shadow-xs rounded [writing-mode:vertical-rl] rotate-180">20 ft</span>
+<div class="flex-1 w-px bg-secondary"></div>
+<span class="material-symbols-outlined text-[16px] text-secondary -mt-1">arrow_drop_down</span>
+</div>
+</div>
+<!-- SVG 2D Floor Plan Schematic -->
+<div class="w-full h-full relative rounded-md shadow-md bg-[#FAF8F5] overflow-hidden">
+<svg class="w-full h-full" viewbox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+<!-- Floor Materials / Textures -->
+<!-- Bedroom Floor (Warm Light Wood planks) -->
+<rect fill="#F4EEDB" height="185" width="235" x="15" y="15"></rect>
+<line stroke="#E3DAC3" stroke-width="0.8" x1="15" x2="250" y1="52" y2="52"></line>
+<line stroke="#E3DAC3" stroke-width="0.8" x1="15" x2="250" y1="89" y2="89"></line>
+<line stroke="#E3DAC3" stroke-width="0.8" x1="15" x2="250" y1="126" y2="126"></line>
+<line stroke="#E3DAC3" stroke-width="0.8" x1="15" x2="250" y1="163" y2="163"></line>
+<!-- Kitchen Floor (Ceramic Grid Tiles) -->
+<rect fill="#EDE9E3" height="185" width="235" x="15" y="200"></rect>
+<!-- Tile gridlines -->
+<line stroke="#DDD7CE" stroke-width="0.8" x1="62" x2="62" y1="200" y2="385"></line>
+<line stroke="#DDD7CE" stroke-width="0.8" x1="109" x2="109" y1="200" y2="385"></line>
+<line stroke="#DDD7CE" stroke-width="0.8" x1="156" x2="156" y1="200" y2="385"></line>
+<line stroke="#DDD7CE" stroke-width="0.8" x1="203" x2="203" y1="200" y2="385"></line>
+<line stroke="#DDD7CE" stroke-width="0.8" x1="15" x2="250" y1="246" y2="246"></line>
+<line stroke="#DDD7CE" stroke-width="0.8" x1="15" x2="250" y1="292" y2="292"></line>
+<line stroke="#DDD7CE" stroke-width="0.8" x1="15" x2="250" y1="338" y2="338"></line>
+<!-- Living Room Floor (Warm Oak Flooring) -->
+<rect fill="#F7F1E5" height="235" width="335" x="250" y="15"></rect>
+<line stroke="#E9DFC9" stroke-width="0.8" x1="250" x2="585" y1="62" y2="62"></line>
+<line stroke="#E9DFC9" stroke-width="0.8" x1="250" x2="585" y1="109" y2="109"></line>
+<line stroke="#E9DFC9" stroke-width="0.8" x1="250" x2="585" y1="156" y2="156"></line>
+<line stroke="#E9DFC9" stroke-width="0.8" x1="250" x2="585" y1="203" y2="203"></line>
+<!-- Bathroom Floor (Cool Marble / Slate Tiles) -->
+<rect fill="#E2E7ED" height="135" width="225" x="360" y="250"></rect>
+<line stroke="#CBD3DE" stroke-width="0.8" x1="416" x2="416" y1="250" y2="385"></line>
+<line stroke="#CBD3DE" stroke-width="0.8" x1="472" x2="472" y1="250" y2="385"></line>
+<line stroke="#CBD3DE" stroke-width="0.8" x1="528" x2="528" y1="250" y2="385"></line>
+<line stroke="#CBD3DE" stroke-width="0.8" x1="360" x2="585" y1="295" y2="295"></line>
+<line stroke="#CBD3DE" stroke-width="0.8" x1="360" x2="585" y1="340" y2="340"></line>
+<!-- Foyer / Hallway floor -->
+<rect fill="#FAF6EE" height="135" width="110" x="250" y="250"></rect>
+<!-- ================= FURNITURE ================= -->
+<!-- BEDROOM FURNITURE -->
+<!-- Queen Bed -->
+<g id="bed-unit">
+<rect fill="#D9D4C7" height="110" rx="4" stroke="#8A8275" stroke-width="1.5" width="90" x="45" y="30"></rect>
+<rect fill="#5F574B" height="10" rx="2" width="90" x="45" y="24"></rect>
+<!-- Pillows -->
+<rect fill="#FFFFFF" height="22" rx="4" stroke="#C2BDB2" stroke-width="1" width="34" x="52" y="36"></rect>
+<rect fill="#FFFFFF" height="22" rx="4" stroke="#C2BDB2" stroke-width="1" width="34" x="94" y="36"></rect>
+<!-- Duvet fold line -->
+<path d="M 45 78 C 80 72, 100 72, 135 78" fill="none" stroke="#8A8275" stroke-width="1.2"></path>
+</g>
+<!-- Nightstands -->
+<rect fill="#A89F91" height="22" rx="2" stroke="#5F574B" stroke-width="1" width="18" x="22" y="30"></rect>
+<circle cx="31" cy="41" fill="#D5CBBF" r="3"></circle>
+<rect fill="#A89F91" height="22" rx="2" stroke="#5F574B" stroke-width="1" width="18" x="140" y="30"></rect>
+<circle cx="149" cy="41" fill="#D5CBBF" r="3"></circle>
+<!-- Wardrobe Closet -->
+<rect fill="#C7BEB1" height="130" rx="2" stroke="#70685C" stroke-width="1.5" width="55" x="175" y="30"></rect>
+<line stroke="#70685C" stroke-width="1" x1="202" x2="202" y1="30" y2="160"></line>
+<!-- Plant in Bedroom -->
+<circle cx="35" cy="175" fill="#7E9A82" r="11"></circle>
+<circle cx="35" cy="175" fill="#4B634F" r="5"></circle>
+<!-- LIVING ROOM FURNITURE -->
+<!-- Large 3-Seater Sofa -->
+<g id="living-sofa">
+<rect fill="#E6DFD3" height="42" rx="6" stroke="#8C8170" stroke-width="1.5" width="115" x="330" y="30"></rect>
+<!-- Cushions -->
+<rect fill="#FAF6EE" height="24" rx="3" stroke="#A39886" stroke-width="0.8" width="34" x="334" y="44"></rect>
+<rect fill="#FAF6EE" height="24" rx="3" stroke="#A39886" stroke-width="0.8" width="34" x="371" y="44"></rect>
+<rect fill="#FAF6EE" height="24" rx="3" stroke="#A39886" stroke-width="0.8" width="34" x="408" y="44"></rect>
+<!-- Side armrests -->
+<rect fill="#C9BFB0" height="42" rx="2" stroke="#8C8170" stroke-width="1" width="8" x="326" y="30"></rect>
+<rect fill="#C9BFB0" height="42" rx="2" stroke="#8C8170" stroke-width="1" width="8" x="442" y="30"></rect>
+</g>
+<!-- Area Rug -->
+<rect fill="#EEE7D7" height="105" rx="8" stroke="#D3C9B4" stroke-dasharray="3 3" stroke-width="1" width="165" x="305" y="85"></rect>
+<!-- Coffee Table with Vase -->
+<rect fill="#C2A888" height="42" rx="6" stroke="#7B6143" stroke-width="1.2" width="75" x="350" y="112"></rect>
+<circle cx="387" cy="133" fill="#7E9A82" r="8"></circle>
+<circle cx="387" cy="133" fill="#E2E7ED" r="3"></circle>
+<!-- Accent Armchair -->
+<rect fill="#E4DCD0" height="36" rx="5" stroke="#8C8170" stroke-width="1.2" width="112" x="332" y="152"></rect>
+<!-- TV Unit & Media Console on right wall -->
+<rect fill="#5F574B" height="95" rx="2" stroke="#2B261F" stroke-width="1.2" width="16" x="560" y="65"></rect>
+<rect fill="#121B2E" height="75" rx="1" width="4" x="564" y="75"></rect>
+<!-- Plant in Living Corner -->
+<circle cx="560" cy="38" fill="#6A8B6F" r="10"></circle>
+<circle cx="560" cy="38" fill="#3D5341" r="4"></circle>
+<!-- KITCHEN FURNITURE -->
+<!-- Kitchen Counter L-Shape -->
+<path d="M 22 210 L 115 210 L 115 245 L 60 245 L 60 375 L 22 375 Z" fill="#D9DFE7" stroke="#717C8A" stroke-width="1.5"></path>
+<!-- Stovetop with 4 burners -->
+<rect fill="#2B3441" height="25" rx="2" width="32" x="26" y="215"></rect>
+<circle cx="34" cy="223" fill="#D1DAF4" r="3"></circle>
+<circle cx="50" cy="223" fill="#D1DAF4" r="3"></circle>
+<circle cx="34" cy="233" fill="#D1DAF4" r="3"></circle>
+<circle cx="50" cy="233" fill="#D1DAF4" r="3"></circle>
+<!-- Sink with double basin -->
+<rect fill="#A8B4C4" height="42" rx="2" stroke="#4C5765" stroke-width="1" width="28" x="26" y="310"></rect>
+<rect fill="#FFFFFF" height="15" rx="1" width="22" x="29" y="314"></rect>
+<rect fill="#FFFFFF" height="15" rx="1" width="22" x="29" y="333"></rect>
+<!-- Dining Table & 2 Chairs -->
+<rect fill="#B39B82" height="60" rx="4" stroke="#68543E" stroke-width="1.2" width="45" x="135" y="275"></rect>
+<!-- Chair Top -->
+<rect fill="#8C7761" height="10" rx="3" stroke="#4C3C2C" stroke-width="1" width="25" x="145" y="260"></rect>
+<!-- Chair Bottom -->
+<rect fill="#8C7761" height="10" rx="3" stroke="#4C3C2C" stroke-width="1" width="25" x="145" y="340"></rect>
+<!-- BATHROOM FIXTURES -->
+<!-- Walk-in Glass Shower -->
+<rect fill="#D6E5F5" height="95" rx="2" stroke="#007DB2" stroke-width="1.5" width="75" x="500" y="265"></rect>
+<line stroke="#B3C5FF" stroke-dasharray="2 2" stroke-width="0.8" x1="500" x2="575" y1="265" y2="360"></line>
+<circle cx="560" cy="285" fill="#737687" r="5"></circle>
+<!-- Bathroom Vanity Sink -->
+<rect fill="#FFFFFF" height="28" rx="2" stroke="#717C8A" stroke-width="1.5" width="60" x="420" y="345"></rect>
+<ellipse cx="450" cy="359" fill="#E8EDF4" rx="18" ry="9" stroke="#8E99A8" stroke-width="1"></ellipse>
+<!-- Toilet Unit -->
+<rect fill="#DDE3EC" height="14" rx="2" stroke="#717C8A" stroke-width="1" width="30" x="375" y="342"></rect>
+<ellipse cx="390" cy="365" fill="#FFFFFF" rx="11" ry="14" stroke="#717C8A" stroke-width="1.2"></ellipse>
+<!-- ================= INTERIOR WALLS ================= -->
+<!-- Divider Wall: Bedroom vs Living Room -->
+<rect fill="#1E2837" height="185" width="14" x="242" y="15"></rect>
+<!-- Divider Wall: Bedroom vs Kitchen -->
+<rect fill="#1E2837" height="14" width="235" x="15" y="193"></rect>
+<!-- Divider Wall: Living Room vs Bathroom & Foyer -->
+<rect fill="#1E2837" height="14" width="232" x="353" y="243"></rect>
+<!-- Bathroom Left Wall with door opening -->
+<rect fill="#1E2837" height="60" width="14" x="353" y="250"></rect>
+<!-- ================= EXTERIOR BOUNDARY WALLS ================= -->
+<!-- Top exterior wall -->
+<rect fill="#121B2E" height="14" width="584" x="8" y="8"></rect>
+<!-- Left exterior wall -->
+<rect fill="#121B2E" height="384" width="14" x="8" y="8"></rect>
+<!-- Right exterior wall -->
+<rect fill="#121B2E" height="384" width="14" x="578" y="8"></rect>
+<!-- Bottom exterior wall (with main entry recess) -->
+<rect fill="#121B2E" height="14" width="250" x="8" y="378"></rect>
+<rect fill="#121B2E" height="14" width="272" x="320" y="378"></rect>
+<!-- ================= WINDOWS (Double lines) ================= -->
+<!-- Bedroom Window (top) -->
+<rect fill="#FFFFFF" height="14" stroke="#0052D6" stroke-width="1.5" width="80" x="90" y="8"></rect>
+<line stroke="#007DB2" stroke-width="2" x1="90" x2="170" y1="15" y2="15"></line>
+<!-- Living Room Window (top) -->
+<rect fill="#FFFFFF" height="14" stroke="#0052D6" stroke-width="1.5" width="90" x="360" y="8"></rect>
+<line stroke="#007DB2" stroke-width="2" x1="360" x2="450" y1="15" y2="15"></line>
+<!-- Living Room Balcony Window (right) -->
+<rect fill="#FFFFFF" height="70" stroke="#0052D6" stroke-width="1.5" width="14" x="578" y="90"></rect>
+<line stroke="#007DB2" stroke-width="2" x1="585" x2="585" y1="90" y2="160"></line>
+<!-- ================= DOORS & SWING ARCS ================= -->
+<!-- Main Apartment Entry Door (Bottom Center) -->
+<path d="M 265 385 A 48 48 0 0 1 313 337" fill="none" stroke="#246BFD" stroke-dasharray="2 2" stroke-width="1.5"></path>
+<line stroke="#94A3B8" stroke-linecap="round" stroke-width="3" x1="265" x2="313" y1="385" y2="385"></line>
+<!-- Bedroom Door (Into Hallway) -->
+<path d="M 245 170 A 35 35 0 0 1 210 135" fill="none" stroke="#737687" stroke-dasharray="2 2" stroke-width="1.2"></path>
+<line stroke="#737687" stroke-linecap="round" stroke-width="2.5" x1="245" x2="245" y1="170" y2="135"></line>
+<!-- Bathroom Door -->
+<path d="M 360 315 A 32 32 0 0 1 392 347" fill="none" stroke="#737687" stroke-dasharray="2 2" stroke-width="1.2"></path>
+<line stroke="#737687" stroke-linecap="round" stroke-width="2.5" x1="360" x2="392" y1="315" y2="315"></line>
+<!-- ================= LABELS & TEXT ================= -->
+<text fill="#121B2E" font-family="Plus Jakarta Sans" font-size="13" font-weight="700" text-anchor="middle" x="132" y="168">Bedroom</text>
+<text fill="#505F76" font-family="Plus Jakarta Sans" font-size="10" font-weight="500" text-anchor="middle" x="132" y="182">12 × 12 ft</text>
+<!-- Active Selection Box around Living Room -->
+<rect fill="none" height="212" opacity="0.6" rx="4" stroke="#246BFD" stroke-dasharray="4 3" stroke-width="1.5" width="310" x="260" y="24"></rect>
+<text fill="#121B2E" font-family="Plus Jakarta Sans" font-size="14" font-weight="700" text-anchor="middle" x="415" y="196">Living Room</text>
+<text fill="#505F76" font-family="Plus Jakarta Sans" font-size="10" font-weight="500" text-anchor="middle" x="415" y="210">12 × 16 ft</text>
+<text fill="#121B2E" font-family="Plus Jakarta Sans" font-size="13" font-weight="700" text-anchor="middle" x="132" y="358">Kitchen</text>
+<text fill="#505F76" font-family="Plus Jakarta Sans" font-size="10" font-weight="500" text-anchor="middle" x="132" y="371">8 × 12 ft</text>
+<text fill="#121B2E" font-family="Plus Jakarta Sans" font-size="12" font-weight="700" text-anchor="middle" x="460" y="318">Bathroom</text>
+<text fill="#505F76" font-family="Plus Jakarta Sans" font-size="9" font-weight="500" text-anchor="middle" x="460" y="331">6 × 8 ft</text>
+</svg>
+</div>
+</div>
+<!-- Bottom Floating CAD Drafting Toolbar (macOS Dock Style) -->
+<div class="absolute bottom-5 left-1/2 -translate-x-1/2 bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl shadow-xl px-3 py-2 flex items-center gap-1 z-20">
+<button class="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">crop_square</span>
+<span class="font-caption-xs text-caption-xs">Add Wall</span>
+</button>
+<button class="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">sensor_door</span>
+<span class="font-caption-xs text-caption-xs">Add Door</span>
+</button>
+<button class="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">window</span>
+<span class="font-caption-xs text-caption-xs">Add Window</span>
+</button>
+<span class="w-px h-6 bg-outline-variant/60 mx-1"></span>
+<button class="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl bg-surface-container-high text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">chair</span>
+<span class="font-caption-xs text-caption-xs font-semibold">Furniture</span>
+</button>
+<button class="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-caption-xs text-caption-xs">Annotate</span>
+</button>
+<button class="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">straighten</span>
+<span class="font-caption-xs text-caption-xs">Measure</span>
+</button>
+</div>
+<!-- Zoom HUD Pill (Top right overlay on canvas) -->
+<div class="absolute top-4 right-4 bg-surface-container-lowest/90 backdrop-blur-md rounded-lg shadow-sm px-2 py-1 flex items-center gap-1.5 z-10 text-on-surface-variant">
+<button class="w-6 h-6 flex items-center justify-center hover:bg-surface-container rounded" title="Zoom In" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+<span class="font-caption-xs text-caption-xs font-semibold px-1 text-on-surface">100%</span>
+<button class="w-6 h-6 flex items-center justify-center hover:bg-surface-container rounded" title="Zoom Out" type="button">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<span class="w-px h-3 bg-outline-variant/50"></span>
+<button class="w-6 h-6 flex items-center justify-center hover:bg-surface-container rounded text-primary" title="Fit to Screen" type="button">
+<span class="material-symbols-outlined text-[16px]">crop_free</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- COLUMN 3: RIGHT 3D PREVIEW & VARIATIONS    -->
+<!-- ========================================== -->
+<aside class="lg:col-span-12 xl:col-span-3 flex flex-col gap-space-md">
+<!-- CARD 1: 3D Isometric Spatial Preview -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span>3D Preview</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-tertiary font-caption-xs text-caption-xs font-semibold">Real-time</span>
+</h2>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" title="Expand Fullscreen 3D View" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_full</span>
+</button>
+</div>
+<!-- Main 3D Render Window -->
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container-low group shadow-xs">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" data-alt="High-resolution photorealistic 3D architectural cutaway isometric rendering of a 600 square foot modern apartment, showing living room with beige sofa, bedroom with queen bed, kitchen with breakfast bar, and tiled bathroom with warm natural sun lighting and soft interior shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMF8eNVL979pfToQ1a8untTfPZK9fAxF2EVPpw05tXmIjOAOUrGsLMUxgCIil7bFVTrdqbC8YejvbE8RE7bYD6CJ7sS-9LGXrQJYefVQdP-4wozEElURHUgfWAQozXiYNFawTHimwBVwo4cSCRM7TXl7A4k0yk8Dr71W5HHirBW-DgB8WwRpCmfUh1R60PkYPOwmMbbuTllUby6sncfj3x7SaAxD0H8qGFMrAEclo88wvwk4-fi_gPpw"/>
+<!-- 3D Viewport Orbit Compass / Gizmo Overlay -->
+<div class="absolute top-2.5 right-2.5 bg-surface-container-lowest/80 backdrop-blur-sm p-1 rounded-lg flex items-center gap-1 shadow-sm">
+<button class="px-1.5 py-0.5 rounded bg-surface-container text-primary font-caption-xs text-caption-xs font-bold" type="button">ISO</button>
+<button class="px-1.5 py-0.5 rounded text-secondary hover:text-on-surface font-caption-xs text-caption-xs" type="button">TOP</button>
+<button class="px-1.5 py-0.5 rounded text-secondary hover:text-on-surface font-caption-xs text-caption-xs" type="button">POV</button>
+</div>
+<!-- Lighting Mode pill -->
+<div class="absolute bottom-2.5 left-2.5 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">wb_sunny</span>
+<span class="font-caption-xs text-caption-xs text-on-surface font-semibold">Golden Hour (4 PM)</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-secondary pt-1">
+            Synchronized live from active 2D floor plan. Click and drag in preview to orbit 360°.
+          </p>
+</div>
+<!-- CARD 2: Alternate Design Variations -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">More Designs</h2>
+<button class="font-label-sm text-label-sm text-primary hover:underline" type="button">See all (12)</button>
+</div>
+<!-- 2x2 Grid of alternate layout variations -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Modern Style (Active) -->
+<div class="flex flex-col gap-1.5 cursor-pointer group">
+<div class="w-full aspect-[4/3] rounded-lg overflow-hidden bg-surface-container ring-2 ring-primary relative shadow-xs">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Cutaway 3D floor plan layout of modern apartment showing open concept living room, light wood floors, and white cabinetry in bright natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPDXW8g-RZ5BUEJwEA_CYNMUvnu9mb1bM86AGE7lOcitrmPzm0LmwiYK0NrQhDMMicX5HXTvRXJuLJAmTsgOjvjLAqmDKviZXZp1CrnVipjlYodejskppie_yyBrl-iNRlPnik8ckl3_RaoNvzZ2F1RETJRaIBESWdnEhs8zrk-c0D__GB6D5JuKO13aGPM2etTLP8WQ61rZUpJ78r9qn5dFrcSDPi5V-lLaucAjYNfXJuiKr8ygKBcA"/>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[10px]">check</span>
+</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-primary">Modern Style</span>
+<span class="font-caption-xs text-caption-xs text-outline">Active</span>
+</div>
+</div>
+<!-- Minimal Style -->
+<div class="flex flex-col gap-1.5 cursor-pointer group">
+<div class="w-full aspect-[4/3] rounded-lg overflow-hidden bg-surface-container relative shadow-xs opacity-90 group-hover:opacity-100 transition-opacity">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Minimalist apartment layout 3D bird eye view with streamlined Scandinavian oak furniture, neutral beige tones, and large uncluttered spaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-gmge0b_MR3ub9asFB1w6RKBRhnAvfEinqWFKrEaJNpJVhEYN9YmPCUl8YOsW35ugfoKFt4yC10YepMAdiG-vKZBfhAKVlKdT9JN0EKRMWI1pNXYRjmVySY0dQiRao6LJ3ity8uT-BjMKdJG7BUvkmY1bArqNTHfMi80qRQAexztCDlaVk3jbCCjoH7irq32IUe1o75jeYPrcAK7nCNlVIH9fne1oUKYH0Nwj4u2mwPfJp1sFETiFfQ"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-primary">Minimal Style</span>
+<span class="font-caption-xs text-caption-xs text-outline">Alt A</span>
+</div>
+</div>
+<!-- Classic Style -->
+<div class="flex flex-col gap-1.5 cursor-pointer group">
+<div class="w-full aspect-[4/3] rounded-lg overflow-hidden bg-surface-container relative shadow-xs opacity-90 group-hover:opacity-100 transition-opacity">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Classic style 3D cutaway apartment with dark walnut wood trim, traditional furniture, soft cream rugs, and cozy library nook." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfQ4m6XDj0gHPhCoNKoKEf2glWvvieNyuIjJO-YFJ-Aw_ES9i0kxZg2_YwzTXCA49bZhmDT0NOcfLKMa2blH2aIyx3OwOI3BPzPXaBXwwMg5JL3wodniUYR1zowfdO3aoIuq1XgXL8q5HaGe2AaczEDMJj9ZVmh9lpRM_u3_TORTKGAt3z8cDWy2OannQu-cDp10fZecPZuEtkJkyvuWKL-RaWRM6khJDt1LzLdeWj9So7oDEA_pVHlw"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-primary">Classic Style</span>
+<span class="font-caption-xs text-caption-xs text-outline">Alt B</span>
+</div>
+</div>
+<!-- Industrial Style -->
+<div class="flex flex-col gap-1.5 cursor-pointer group">
+<div class="w-full aspect-[4/3] rounded-lg overflow-hidden bg-surface-container relative shadow-xs opacity-90 group-hover:opacity-100 transition-opacity">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Industrial loft layout cutaway 3D with dark metal fixtures, concrete textured floors, exposed ceiling pipes, and leather sofa." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBymJzYJC3xcBCvJD_IowykMIKzy4oGHFIBSffvxWHDSB0j5dmCLrRXg0SQmEC3xmVZh_CYa9rSafwyRaEv5RL8yPWsgStOp9U-HP0zhhH3XqpVt6kSy_Cd_JN2CfKrKbAWPC2kmO0mxiCaExGImA5UX1K3C3Rnj2lLIRZlmkp0OWtYy8KIJ0Hevw97rXktRSFCpwVpCBQlbTndoquu1y1hNT9jt8V_GmF0g0CdJQq8gH6YvPbmwxl12w"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-primary">Industrial Style</span>
+<span class="font-caption-xs text-caption-xs text-outline">Alt C</span>
+</div>
+</div>
+</div>
+<!-- Side-by-Side Compare CTA -->
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">splitscreen</span>
+<span>Compare Variations Side-by-Side</span>
+</button>
+</div>
+</aside>
+</div>
+</div>
+<script>
+    // Lightweight CAD Micro-Interactions
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle button active states for segmented tools
+      const segments = document.querySelectorAll('.grid-cols-3 button');
+      segments.forEach(btn => {
+        btn.addEventListener('click', () => {
+          segments.forEach(b => {
+            b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+            b.classList.add('text-on-surface-variant');
+          });
+          btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+          btn.classList.remove('text-on-surface-variant');
+        });
+      });
+    });
+  </script>
+</div></main></body></html>

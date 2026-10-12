@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ──────────────────────────────────────────────── */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont,
+      'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-variant-numeric: tabular-nums;
+  }
+
+  body {
+    @apply bg-surface text-content-primary m-0 p-0;
+    overscroll-behavior: none;
+  }
+
+  /* Minimal scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-content-muted/30 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-content-muted/50;
+  }
+}
+
+/* ─── Component Layer ───────────────────────────────────── */
+
+@layer components {
+  /* Panel — Level 1 elevation card */
+  .panel {
+    @apply bg-surface-card rounded-xl border border-border-hairline shadow-level-1;
+  }
+
+  /* Floating toolbar — Level 2 elevation */
+  .floating-bar {
+    @apply bg-surface-card rounded-xl border border-border-hairline shadow-level-2;
+  }
+
+  /* Modal overlay — Level 3 elevation */
+  .modal-panel {
+    @apply bg-surface-card rounded-xl border border-border-hairline shadow-level-3;
+  }
+
+  /* macOS-style focus ring */
+  .focus-ring {
+    @apply outline-none;
+    &:focus-visible {
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #246bfd;
+    }
+  }
+
+  /* Input field base */
+  .input-base {
+    @apply bg-surface-card border border-border-structural rounded-lg h-10
+           text-body-md text-content-primary px-3 transition-colors duration-150;
+    &:focus {
+      @apply border-primary outline-none;
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #246bfd;
+    }
+    &::placeholder {
+      @apply text-content-muted;
+    }
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-primary text-white font-semibold
+           rounded-md h-11 px-5
+           transition-all duration-150
+           hover:bg-primary-hover active:scale-[0.98]
+           focus-visible:shadow-focus-ring focus-visible:outline-none;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-surface-card text-content-primary font-medium
+           border border-border-structural rounded-md h-10 px-4
+           transition-all duration-150
+           hover:bg-surface focus-visible:shadow-focus-ring focus-visible:outline-none;
+  }
+
+  /* Ghost / icon button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center
+           text-content-secondary rounded-lg p-2
+           transition-colors duration-150
+           hover:bg-surface-subtle hover:text-content-primary
+           focus-visible:shadow-focus-ring focus-visible:outline-none;
+  }
+
+  /* Badge / pill */
+  .badge {
+    @apply inline-flex items-center gap-1
+           text-caption-xs font-semibold
+           rounded-full px-2.5 py-0.5;
+  }
+
+  /* Segmented control container */
+  .segment-container {
+    @apply inline-flex bg-surface-subtle rounded-md p-1 gap-0.5;
+  }
+
+  /* Segmented control item */
+  .segment-item {
+    @apply px-3 py-1.5 rounded text-body-sm font-medium
+           text-content-secondary cursor-pointer
+           transition-all duration-150 select-none;
+    &:hover {
+      @apply text-content-primary;
+    }
+    &.active {
+      @apply bg-surface-card text-primary shadow-segment-active;
+    }
+  }
+
+  /* Stat card */
+  .stat-card {
+    @apply flex items-center gap-3 px-5 py-3 rounded-xl border border-border-hairline bg-surface-card;
+  }
+}
+
+/* ─── Utility Layer ─────────────────────────────────────── */
+
+@layer utilities {
+  .text-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}

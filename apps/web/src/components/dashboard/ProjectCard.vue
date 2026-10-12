@@ -10,11 +10,7 @@ import { useRouter } from 'vue-router';
 import {
   Clock,
   ArrowRight,
-  Bed,
-  Bath,
-  Sofa,
-  UtensilsCrossed,
-} from 'lucide-vue-next';
+} from '@lucide/vue';
 
 const props = defineProps<{
   project: Project;

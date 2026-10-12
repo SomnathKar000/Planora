@@ -12,7 +12,7 @@ import {
   Grid3x3,
   List,
   SlidersHorizontal,
-} from 'lucide-vue-next';
+} from '@lucide/vue';
 
 const router = useRouter();
 const store = useProjectsStore();

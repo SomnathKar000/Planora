@@ -8,12 +8,11 @@ import {
   ProjectStatus,
   RoomType,
 } from '@planora/domain';
-import type { Project, Layout, RoomProgramEntry } from '@planora/domain';
+import type { Project } from '@planora/domain';
 
 // ── Seed data for development ────────────────────────────
 
 function createSeedProjects(): Project[] {
-  const now = new Date().toISOString();
   return [
     {
       id: 'proj-1',

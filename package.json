@@ -12,7 +12,7 @@
     "dev:api": "npm run dev --workspace=apps/api",
     "build:web": "npm run build --workspace=apps/web",
     "build:api": "npm run build --workspace=apps/api",
-    "build:packages": "npm run build --workspace=packages/domain && npm run build --workspace=packages/shared-types",
+    "build:packages": "npm run build --workspace=packages/domain && npm run build --workspace=packages/shared-types && npm run build --workspace=packages/layout-engine",
     "build": "npm run build:packages && npm run build:web && npm run build:api",
     "lint": "eslint . --ext .ts,.vue",
     "format": "prettier --write .",

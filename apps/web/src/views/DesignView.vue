@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { PenTool, Box, Footprints } from 'lucide-vue-next';
+import { PenTool, Box, Footprints } from '@lucide/vue';
 
 const route = useRoute();
 const projectId = route.params.projectId as string;

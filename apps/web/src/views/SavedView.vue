@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Bookmark } from 'lucide-vue-next';
+import { Bookmark } from '@lucide/vue';
 </script>
 
 <template>

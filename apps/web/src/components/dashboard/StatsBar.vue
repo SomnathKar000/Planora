@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Briefcase, Clock, HardDrive, Cpu } from 'lucide-vue-next';
+import { Briefcase, Clock, HardDrive, Cpu } from '@lucide/vue';
 
 defineProps<{
   totalProjects: number;

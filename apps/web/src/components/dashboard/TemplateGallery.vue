@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LayoutGrid } from 'lucide-vue-next';
+import { LayoutGrid } from '@lucide/vue';
 
 interface Template {
   id: string;

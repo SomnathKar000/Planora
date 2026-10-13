@@ -64,10 +64,11 @@ npx prisma migrate dev
 | Phase | Scope | Status |
 |-------|-------|--------|
 | 1 | Project setup, types, design system, dashboard, routing | ✅ Complete |
-| 2 | Project creation wizard, room configuration, validation | ⬜ Next |
-| 3 | Canonical geometry, layout engine, greedy packer | ⬜ |
-| 4 | 2D SVG editor, selection, drawing, snapping, undo/redo | ⬜ |
-| 5 | Three.js 3D rendering, synchronized with model | ⬜ |
-| 6 | API, persistence, PostgreSQL, project CRUD | ⬜ |
-| 7 | Export (PNG/PDF), responsive, error states, accessibility | ⬜ |
-| 8 | Integration review, tests, performance, docs | ⬜ |
+| 2 | Project creation wizard, room configuration, validation, feasibility model | ✅ Complete |
+| 3 | Main CAD Studio workspace, 2D SVG canvas, Three.js 3D viewport, variations | ✅ Complete |
+| 4 | Layout engine generator, REST API endpoints, Vitest test suites | ✅ Complete |
+| 5 | Database persistence, PostgreSQL, Prisma models | ⏳ Next |
+| 6 | Export (PDF/PNG), command-based undo/redo, responsive polish | ⏳ Planned |
+| 7 | AI inpainting, texture/material staging, integration tests | ⏳ Planned |
+
+> For comprehensive component mappings, file paths, and handover instructions, refer to [`PROJECT_STATUS.md`](../PROJECT_STATUS.md).

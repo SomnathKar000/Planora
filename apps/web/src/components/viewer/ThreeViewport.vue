@@ -41,7 +41,12 @@ function initThree() {
   updateCameraPosition();
 
   // Renderer
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+    powerPreference: 'high-performance',
+    preserveDrawingBuffer: true,
+  });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.shadowMap.enabled = true;
@@ -285,6 +290,18 @@ onBeforeUnmount(() => {
     renderer.forceContextLoss();
   }
   scene?.clear();
+});
+
+function captureScreenshot(): string {
+  if (renderer && scene && camera) {
+    renderer.render(scene, camera);
+    return renderer.domElement.toDataURL('image/png');
+  }
+  return '';
+}
+
+defineExpose({
+  captureScreenshot,
 });
 </script>
 

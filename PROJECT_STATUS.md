@@ -39,8 +39,8 @@ Planora is an AI-assisted floor-plan and interior design application enabling us
 | **Phase 4.5** | Backend Modular Refactor | ✅ **Complete** | Refactored monolithic `index.ts` into modular layered architecture (see §3 below) |
 | **Phase 5** | Database Persistence (Prisma + PostgreSQL) | ✅ **Complete** | `docker-compose.yml`, Prisma 6 schema (`Project`, `Layout`, `RoomProgramEntry`), `PrismaProjectRepository`, async service/controller, standalone `db:seed` CLI |
 | **Phase 6** | Interactive 2D CAD Studio Editing | ✅ **Complete** | Pointer dragging & snapping, room vertex resize handles, wall drafting, door/window fixture placement, `FurnitureCatalogModal.vue`, `ObjectInspector.vue`, full Undo/Redo history (⌘Z/⌘⇧Z), real-time 3D Three.js sync |
-| **Phase 7** | High-Res Blueprint & 3D Export (PDF, PNG, SVG) | ⏳ **Next** | Printable vector blueprint with title block & scale bar, high-res Three.js WebGL canvas snapshot, SVG layout export |
-| **Phase 8** | Staging & AI Inpainting / Style Transfer integration | ⏳ Planned | External AI renderer / image generation pipelines |
+| **Phase 7** | High-Res Blueprint & 3D Export (PDF, PNG, SVG) | ✅ **Complete** | Vector PDF blueprint with title block, North arrow, scale & room schedule (`exportBlueprint.ts`), `ExportModal.vue` (PDF, SVG, 3D PNG, JSON), WebGL buffer capture (`ThreeViewport.vue`) |
+| **Phase 8** | Staging & AI Inpainting / Style Transfer integration | ⏳ **Next** | Generative interior staging inpainting, photorealistic style transfer presets, client showcase mode |
 
 ---
 
@@ -59,9 +59,11 @@ planora/
 │   │   │   │   ├── editor/                # FloorPlanCanvas.vue, ToolDock.vue, CanvasToolbar.vue,
 │   │   │   │   │                          # LayoutVariationsBar.vue, CompareModal.vue,
 │   │   │   │   │                          # WorkspaceLeftPanel.vue, FurnitureCatalogModal.vue,
-│   │   │   │   │                          # ObjectInspector.vue
+│   │   │   │   │                          # ObjectInspector.vue, ExportModal.vue
 │   │   │   │   ├── viewer/                # ThreeViewport.vue (Three.js WebGL canvas)
 │   │   │   │   └── layout/                # AppNavbar.vue
+│   │   │   ├── utils/
+│   │   │   │   └── exportBlueprint.ts     # PDF, SVG, PNG, and JSON architectural export generators
 │   │   │   ├── views/
 │   │   │   │   ├── ProjectsView.vue       # Route: /projects (Dashboard)
 │   │   │   │   ├── NewProjectView.vue     # Route: /projects/new (Wizard)
@@ -211,13 +213,12 @@ npm run test
 
 ## 7. Next Steps for Upcoming Sessions
 
-1. **High-Res Blueprint & 3D Canvas Export (Phase 7 - Next)**:
-   - Export 2D layout as printable vector SVG / PDF blueprint complete with title block, room schedule, dimension ticks, and scale bar.
-   - High-resolution Three.js WebGL canvas capture to PNG (2K / 4K rendering modes).
-   - JSON architectural schema export and import.
-2. **AI Interior Staging & Style Transfer (Phase 8 - Planned)**:
-   - Add prompt-based generative interior inpainting for selected room perspectives.
-   - Generate photo-realistic style-transfer renders for client presentations.
-3. **Advanced Wall Partitioning & Dimension Ticks**:
+1. **AI Interior Staging & Presentation Renders (Phase 8 - Next)**:
+   - Perspective camera shot selection from the 3D scene (Living Room angle, Primary Bedroom view, Kitchen perspective).
+   - Generative interior staging inpainting and realistic furniture texture synthesis.
+   - Client Presentation Mode (full-screen immersive gallery with light/dark staging comparisons).
+2. **Advanced Wall Partitioning & Dimension Ticks**:
    - Multi-vertex wall chain drawing and automated room polygon auto-detection.
    - Dimension annotations tool with interactive dimension lines.
+3. **Multi-Floor Building Stack**:
+   - Floor selector tab (Ground Floor, Level 1, Penthouse) with vertical staircase/elevator alignment.

@@ -14,6 +14,7 @@ import CompareModal from '@/components/editor/CompareModal.vue';
 import WorkspaceLeftPanel from '@/components/editor/WorkspaceLeftPanel.vue';
 import FurnitureCatalogModal, { type CatalogFurnitureItem } from '@/components/editor/FurnitureCatalogModal.vue';
 import ObjectInspector from '@/components/editor/ObjectInspector.vue';
+import ExportModal from '@/components/editor/ExportModal.vue';
 
 import {
   History,
@@ -30,6 +31,9 @@ const project = computed(() => store.getProject(projectId.value));
 const viewMode = ref<ViewMode>('2d');
 const isCompareOpen = ref(false);
 const isCatalogOpen = ref(false);
+const isExportOpen = ref(false);
+const screenshotDataUrl = ref<string>('');
+const threeViewportRef = ref<InstanceType<typeof ThreeViewport> | null>(null);
 const selectedRoom = ref<Room | null>(null);
 const selectedFurniture = ref<Furniture | null>(null);
 
@@ -182,13 +186,14 @@ function handleClear() {
 
 function handleDownload() {
   if (!project.value) return;
-  const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(project.value, null, 2));
-  const downloadAnchor = document.createElement('a');
-  downloadAnchor.setAttribute('href', dataStr);
-  downloadAnchor.setAttribute('download', `${project.value.name.replace(/\s+/g, '_')}_blueprint.json`);
-  document.body.appendChild(downloadAnchor);
-  downloadAnchor.click();
-  downloadAnchor.remove();
+  if (threeViewportRef.value) {
+    try {
+      screenshotDataUrl.value = threeViewportRef.value.captureScreenshot();
+    } catch {
+      screenshotDataUrl.value = '';
+    }
+  }
+  isExportOpen.value = true;
 }
 
 // ── Furniture Catalog Insertion ──────────────────────────────────
@@ -385,6 +390,7 @@ function handleDeleteRoom(id: string) {
         <aside class="lg:col-span-12 xl:col-span-3 flex flex-col gap-5">
           <!-- 3D Synchronized Viewport (shows mini preview when in 2D mode) -->
           <ThreeViewport
+            ref="threeViewportRef"
             :layout="activeLayout"
             :heightFt="project.dimensions.height"
           />
@@ -415,6 +421,15 @@ function handleDeleteRoom(id: string) {
       :unit="project.unit"
       @close="isCatalogOpen = false"
       @select="handleAddCatalogFurniture"
+    />
+
+    <!-- Architectural Deliverables Export Modal -->
+    <ExportModal
+      v-if="isExportOpen"
+      :project="project"
+      :layout="activeLayout"
+      :screenshotDataUrl="screenshotDataUrl"
+      @close="isExportOpen = false"
     />
   </div>
 

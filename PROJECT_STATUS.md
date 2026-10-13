@@ -20,7 +20,7 @@ Planora is an AI-assisted floor-plan and interior design application enabling us
 ### Core Stack
 - **Monorepo**: npm workspaces (`packages/*`, `apps/*`).
 - **Frontend (`apps/web`)**: Vue 3 (Composition API `<script setup>`), Vite, Tailwind CSS, Pinia, Vue Router, `@lucide/vue`, Three.js.
-- **Backend (`apps/api`)**: Node.js, Express, CORS, Zod, tsx.
+- **Backend (`apps/api`)**: Node.js, Express, CORS, Zod, tsx — **modular layered architecture** (config → middleware → modules → shared).
 - **Domain (`packages/domain`)**: Pure TypeScript entities and geometry utilities (zero external framework dependencies).
 - **Layout Engine (`packages/layout-engine`)**: Parametric 2D space partitioner, wall generator, openings, and furniture placement.
 - **Shared Contracts (`packages/shared-types`)**: Zod validation schemas and shared API contracts.
@@ -35,7 +35,8 @@ Planora is an AI-assisted floor-plan and interior design application enabling us
 | **Phase 1** | Monorepo setup, design system tokens, routing, dashboard | ✅ **Complete** | `ProjectsView.vue`, `ProjectCard.vue`, `AppNavbar.vue`, `StatsBar.vue` |
 | **Phase 2** | Parametric project creation wizard & feasibility model | ✅ **Complete** | `NewProjectView.vue`, `ArchetypeSelector.vue`, `DimensionsInput.vue`, `RoomProgramConfig.vue`, `StylePicker.vue`, `SpatialFeasibilityCard.vue` |
 | **Phase 3** | Main CAD Studio workspace (2D SVG + 3D Three.js + Variations) | ✅ **Complete** | `DesignView.vue`, `FloorPlanCanvas.vue`, `ThreeViewport.vue`, `ToolDock.vue`, `CanvasToolbar.vue`, `LayoutVariationsBar.vue`, `CompareModal.vue`, `WorkspaceLeftPanel.vue` |
-| **Phase 4** | Layout Engine & REST API Backend | ✅ **Complete** | `@planora/layout-engine` (`generator.ts`), `@planora/api` (`GET/POST /api/projects`, `generate`), Vitest unit tests |
+| **Phase 4** | Layout Engine & REST API Backend | ✅ **Complete** | `@planora/layout-engine` (`generator.ts`), `@planora/api` (modular: routes → controller → service → repository), Vitest unit tests |
+| **Phase 4.5** | Backend Modular Refactor | ✅ **Complete** | Refactored monolithic `index.ts` into modular layered architecture (see §3 below) |
 | **Phase 5** | Database Persistence (Prisma + PostgreSQL) | ⏳ **Next** | `prisma/schema.prisma`, Docker Compose setup, database migrations |
 | **Phase 6** | High-Res Export (PDF, PNG, SVG) & Advanced Undo/Redo commands | ⏳ Planned | Vector PDF export, image renderer, command pattern history |
 | **Phase 7** | Staging & AI Inpainting / Style Transfer integration | ⏳ Planned | External AI renderer / image generation pipelines |
@@ -70,7 +71,32 @@ planora/
 │   │   │   ├── styles/main.css            # Tailwind + Design System variables & fonts
 │   │   │   └── router/index.ts            # Vue Router definitions
 │   └── api/                               # Express REST API (Port: 3001)
-│       └── src/index.ts                   # REST API routes, in-memory store, layout generation
+│       └── src/
+│           ├── index.ts                   # Server entry point (thin bootstrap)
+│           ├── app.ts                     # Express app factory (middleware, route wiring, DI)
+│           ├── config/
+│           │   └── index.ts               # Centralized runtime config (port, cors, etc.)
+│           ├── middleware/
+│           │   ├── async-handler.ts       # Promise rejection → error middleware bridge
+│           │   ├── error-handler.ts       # Global error handler (AppError → JSON)
+│           │   ├── request-logger.ts      # Request method/path/status/duration logger
+│           │   ├── validate.ts            # Zod schema validation middleware factory
+│           │   └── index.ts               # Barrel export
+│           ├── modules/
+│           │   ├── health/
+│           │   │   └── index.ts           # GET /api/health
+│           │   └── projects/
+│           │       ├── project.repository.ts  # IProjectRepository interface + InMemoryImpl
+│           │       ├── project.service.ts     # Business logic (CRUD, layout generation)
+│           │       ├── project.controller.ts  # Thin HTTP→Service bridge
+│           │       ├── project.routes.ts      # Route registration with validation middleware
+│           │       └── index.ts               # Barrel export
+│           ├── seed/
+│           │   └── index.ts               # Demo data seeder (dev mode)
+│           └── shared/
+│               ├── errors.ts              # AppError, NotFoundError, ValidationError, ConflictError
+│               ├── response.ts            # sendSuccess, sendPaginated, sendError helpers
+│               └── index.ts               # Barrel export
 ├── packages/
 │   ├── domain/                            # Canonical data model
 │   │   ├── src/entities.ts                # Project, Layout, Room, Wall, Opening, Furniture
@@ -91,7 +117,26 @@ planora/
 
 ---
 
-## 4. Key Architectural Rules
+## 4. Backend Architecture (Post-Refactor)
+
+The API follows a **modular layered architecture** pattern:
+
+```
+Request → Middleware (logger, cors, json, validate) → Routes → Controller → Service → Repository
+                                                                                        ↕
+                                                                              In-Memory Map (swap to DB later)
+```
+
+**Key Design Decisions:**
+1. **App Factory Pattern** (`app.ts`): Creates and wires everything, returns the Express app. Testable independently without starting a server.
+2. **Interface-Based Repository** (`IProjectRepository`): Abstracts storage so swapping InMemory → Prisma/Postgres requires only a new implementation, no service or controller changes.
+3. **Typed Error Hierarchy** (`AppError`, `NotFoundError`, `ValidationError`, `ConflictError`): Services throw typed errors; the global error handler renders structured JSON responses.
+4. **Reusable Validation Middleware** (`validate(schema)`): Controllers receive pre-validated, pre-parsed data — no manual `safeParse` calls.
+5. **Async Handler Wrapper**: Catches Promise rejections from async controllers and forwards them to the error middleware — no try/catch boilerplate.
+
+---
+
+## 5. Key Architectural Rules
 
 1. **Internal Geometry in Millimeters**:
    - All spatial dimensions in memory and backend are integer millimeters.
@@ -106,7 +151,7 @@ planora/
 
 ---
 
-## 5. Verified Development Commands
+## 6. Verified Development Commands
 
 Run from the monorepo root:
 
@@ -129,10 +174,11 @@ npm run test
 
 ---
 
-## 6. Next Steps for Upcoming Sessions
+## 7. Next Steps for Upcoming Sessions
 
 1. **Database Integration**:
    - Add Prisma schema in `prisma/schema.prisma` matching `@planora/domain` entities.
+   - Implement `PrismaProjectRepository` that implements `IProjectRepository`.
    - Connect PostgreSQL database in `apps/api` with fallback to in-memory/SQLite.
 2. **Advanced 2D Editing Tools**:
    - Implement interactive wall dragging / room dimension resizing on the 2D SVG canvas.

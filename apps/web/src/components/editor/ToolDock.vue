@@ -17,7 +17,15 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:activeTool', tool: EditorTool): void;
+  (e: 'open-catalog'): void;
 }>();
+
+function handleClick(toolId: EditorTool) {
+  emit('update:activeTool', toolId);
+  if (toolId === 'furniture') {
+    emit('open-catalog');
+  }
+}
 
 interface ToolItem {
   id: EditorTool;
@@ -42,7 +50,7 @@ const tools: ToolItem[] = [
       v-for="t in tools"
       :key="t.id"
       type="button"
-      @click="emit('update:activeTool', t.id)"
+      @click="handleClick(t.id)"
       class="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl transition-all cursor-pointer"
       :class="[
         activeTool === t.id

@@ -2,14 +2,7 @@
 import { computed } from 'vue';
 import { MeasurementUnit } from '@planora/domain';
 import type { RoomProgramEntry } from '@planora/domain';
-import {
-  Compass,
-  Sparkles,
-  Bookmark,
-  X,
-  Lightbulb,
-  AlertTriangle,
-} from '@lucide/vue';
+import { Compass, Sparkles, Bookmark, X, Lightbulb, AlertTriangle } from '@lucide/vue';
 
 const props = defineProps<{
   length: number;
@@ -78,22 +71,24 @@ const ROOM_BLOCK_COLORS = [
 <template>
   <div class="flex flex-col gap-4">
     <!-- Feasibility Card & Live Blueprint Diagram -->
-    <div class="bg-surface-card rounded-2xl p-6 shadow-elevation-2 border border-border-hairline flex flex-col gap-4">
+    <div
+      class="bg-surface-card rounded-2xl p-6 shadow-elevation-2 border border-border-hairline flex flex-col gap-4"
+    >
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <div class="w-7 h-7 rounded-lg bg-blue-50 text-brand-primary flex items-center justify-center">
+          <div
+            class="w-7 h-7 rounded-lg bg-blue-50 text-brand-primary flex items-center justify-center"
+          >
             <Compass class="w-4 h-4" />
           </div>
-          <h3 class="text-title-sm font-semibold text-content-primary">Spatial Feasibility Model</h3>
+          <h3 class="text-title-sm font-semibold text-content-primary">
+            Spatial Feasibility Model
+          </h3>
         </div>
 
         <span
           class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-caption-xs font-semibold transition-colors"
-          :class="[
-            isOverCapacity
-              ? 'bg-rose-100 text-rose-700'
-              : 'bg-emerald-50 text-emerald-700'
-          ]"
+          :class="[isOverCapacity ? 'bg-rose-100 text-rose-700' : 'bg-emerald-50 text-emerald-700']"
         >
           <span
             class="w-1.5 h-1.5 rounded-full"
@@ -104,9 +99,14 @@ const ROOM_BLOCK_COLORS = [
       </div>
 
       <!-- Live Wireframe Schematic CAD Canvas -->
-      <div class="relative w-full aspect-[4/3] bg-slate-900 rounded-xl overflow-hidden p-3.5 flex flex-col items-center justify-between shadow-inner select-none">
+      <div
+        class="relative w-full aspect-[4/3] bg-slate-900 rounded-xl overflow-hidden p-3.5 flex flex-col items-center justify-between shadow-inner select-none"
+      >
         <!-- Blueprint Grid Background Pattern -->
-        <svg class="absolute inset-0 w-full h-full opacity-20 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          class="absolute inset-0 w-full h-full opacity-20 pointer-events-none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
             <pattern id="cadGrid" width="16" height="16" patternUnits="userSpaceOnUse">
               <path d="M 16 0 L 0 0 0 16" fill="none" stroke="#60A5FA" stroke-width="0.5" />
@@ -118,14 +118,18 @@ const ROOM_BLOCK_COLORS = [
         <!-- Top Dimension Callout (Length) -->
         <div class="w-full flex items-center justify-between text-caption-xs text-blue-200/80 z-10">
           <span class="text-[10px]">◀</span>
-          <div class="flex items-center gap-1 bg-slate-800/90 backdrop-blur px-2.5 py-0.5 rounded-full border border-blue-400/30 text-white font-mono text-[11px] shadow-sm">
+          <div
+            class="flex items-center gap-1 bg-slate-800/90 backdrop-blur px-2.5 py-0.5 rounded-full border border-blue-400/30 text-white font-mono text-[11px] shadow-sm"
+          >
             <span>{{ length }} {{ unitLabel }} (Length)</span>
           </div>
           <span class="text-[10px]">▶</span>
         </div>
 
         <!-- Wireframe Floorplan Partition Layout Grid -->
-        <div class="relative w-full flex-1 my-1.5 bg-slate-800/80 rounded-lg p-2 border border-blue-500/40 z-10 overflow-hidden flex flex-col">
+        <div
+          class="relative w-full flex-1 my-1.5 bg-slate-800/80 rounded-lg p-2 border border-blue-500/40 z-10 overflow-hidden flex flex-col"
+        >
           <!-- Room Subdivisions -->
           <div v-if="activeRooms.length > 0" class="w-full h-full grid grid-cols-2 gap-1.5">
             <div
@@ -138,13 +142,13 @@ const ROOM_BLOCK_COLORS = [
                 <span class="text-caption-xs font-bold truncate max-w-[80px]">
                   {{ room.name }}
                 </span>
-                <span class="text-[10px] font-mono opacity-80">
-                  ×{{ room.count }}
-                </span>
+                <span class="text-[10px] font-mono opacity-80"> ×{{ room.count }} </span>
               </div>
               <div class="flex items-center justify-between text-[10px] font-mono">
                 <span class="opacity-70">Zone {{ idx + 1 }}</span>
-                <span class="font-bold">{{ (room.targetArea || 0) * room.count }} {{ unitLabel }}²</span>
+                <span class="font-bold"
+                  >{{ (room.targetArea || 0) * room.count }} {{ unitLabel }}²</span
+                >
               </div>
             </div>
 
@@ -158,7 +162,10 @@ const ROOM_BLOCK_COLORS = [
             </div>
           </div>
 
-          <div v-else class="w-full h-full flex flex-col items-center justify-center text-blue-200/60 text-caption-xs">
+          <div
+            v-else
+            class="w-full h-full flex flex-col items-center justify-center text-blue-200/60 text-caption-xs"
+          >
             <span>Select rooms in program</span>
           </div>
         </div>
@@ -168,12 +175,12 @@ const ROOM_BLOCK_COLORS = [
           <div class="flex items-center gap-1 font-mono text-[10px]">
             <span>H: {{ height }} {{ unitLabel }}</span>
           </div>
-          <div class="flex items-center gap-1 bg-slate-800/90 backdrop-blur px-2.5 py-0.5 rounded-full border border-blue-400/30 text-white font-mono text-[11px] shadow-sm">
+          <div
+            class="flex items-center gap-1 bg-slate-800/90 backdrop-blur px-2.5 py-0.5 rounded-full border border-blue-400/30 text-white font-mono text-[11px] shadow-sm"
+          >
             <span>{{ width }} {{ unitLabel }} (Width)</span>
           </div>
-          <div class="text-[10px] font-mono text-blue-300/80">
-            {{ grossArea }} {{ areaLabel }}
-          </div>
+          <div class="text-[10px] font-mono text-blue-300/80">{{ grossArea }} {{ areaLabel }}</div>
         </div>
       </div>
 
@@ -187,7 +194,9 @@ const ROOM_BLOCK_COLORS = [
         </div>
 
         <!-- Multi-segment Progress Bar -->
-        <div class="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden flex border border-border-hairline">
+        <div
+          class="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden flex border border-border-hairline"
+        >
           <div
             class="h-full transition-all duration-300"
             :class="isOverCapacity ? 'bg-rose-500' : 'bg-brand-primary'"
@@ -202,7 +211,9 @@ const ROOM_BLOCK_COLORS = [
           />
         </div>
 
-        <div class="flex items-center justify-between text-caption-xs text-content-secondary font-medium">
+        <div
+          class="flex items-center justify-between text-caption-xs text-content-secondary font-medium"
+        >
           <span :class="{ 'text-rose-600 font-bold': isOverCapacity }">
             Programmed: {{ totalProgrammedArea }} {{ areaLabel }} ({{ programmedPercent }}%)
           </span>
@@ -216,13 +227,20 @@ const ROOM_BLOCK_COLORS = [
           class="flex items-center gap-2 p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-caption-xs"
         >
           <AlertTriangle class="w-4 h-4 shrink-0" />
-          <span>Programmed rooms exceed footprint by {{ totalProgrammedArea - grossArea }} {{ areaLabel }}. Consider enlarging dimensions or reducing room counts.</span>
+          <span
+            >Programmed rooms exceed footprint by {{ totalProgrammedArea - grossArea }}
+            {{ areaLabel }}. Consider enlarging dimensions or reducing room counts.</span
+          >
         </div>
       </div>
 
       <!-- AI Spatial Intelligence Insight Callout -->
-      <div class="p-3 bg-surface-subtle rounded-xl flex items-start gap-2.5 border border-border-hairline/80">
-        <div class="w-6 h-6 rounded-md bg-blue-100 text-brand-primary flex items-center justify-center shrink-0 mt-0.5">
+      <div
+        class="p-3 bg-surface-subtle rounded-xl flex items-start gap-2.5 border border-border-hairline/80"
+      >
+        <div
+          class="w-6 h-6 rounded-md bg-blue-100 text-brand-primary flex items-center justify-center shrink-0 mt-0.5"
+        >
           <Lightbulb class="w-3.5 h-3.5" />
         </div>
         <div class="flex flex-col">
@@ -230,25 +248,27 @@ const ROOM_BLOCK_COLORS = [
             CAD Architectural Assessment
           </span>
           <span class="text-caption-xs text-content-secondary leading-snug">
-            Generates compliant egress pathways and clusters wet walls (Kitchen & Bath) to optimize plumbing risers.
+            Generates compliant egress pathways and clusters wet walls (Kitchen & Bath) to optimize
+            plumbing risers.
           </span>
         </div>
       </div>
     </div>
 
     <!-- Primary Action Execution Dock -->
-    <div class="bg-surface-card rounded-2xl p-4 shadow-card border border-border-hairline flex flex-col gap-2.5">
+    <div
+      class="bg-surface-card rounded-2xl p-4 shadow-card border border-border-hairline flex flex-col gap-2.5"
+    >
       <button
         type="button"
         @click="emit('submit')"
         :disabled="isSubmitting"
-        class="w-full h-12 bg-brand-primary hover:bg-brand-primary-hover active:bg-blue-800 text-white rounded-xl font-label-md flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer group disabled:opacity-50 disabled:pointer-events-none"
+        class="w-full h-12 bg-primary hover:bg-primary-hover active:bg-blue-800 text-white rounded-xl font-semibold text-body-md flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer group disabled:opacity-50 disabled:pointer-events-none"
       >
-        <Sparkles class="w-5 h-5 group-hover:rotate-12 transition-transform" />
-        <span>{{ isSubmitting ? 'Synthesizing CAD Plan...' : 'Launch Workspace & Synthesize CAD Plan' }}</span>
-        <span class="ml-1.5 px-2 py-0.5 rounded bg-white/20 text-caption-xs font-mono tracking-wider">
-          ⌘↵
-        </span>
+        <Sparkles class="w-5 h-5 group-hover:rotate-12 transition-transform shrink-0" />
+        <span class="font-bold tracking-tight">{{
+          isSubmitting ? 'Synthesizing CAD Plan...' : 'Launch Workspace & Synthesize CAD Plan'
+        }}</span>
       </button>
 
       <div class="grid grid-cols-2 gap-2">

@@ -569,10 +569,11 @@ onBeforeUnmount(() => {
       <button
         type="button"
         @click.stop="resetZoom"
-        class="w-6 h-6 flex items-center justify-center hover:bg-slate-100 rounded text-brand-primary cursor-pointer transition-colors"
+        class="px-1.5 h-6 flex items-center gap-1 hover:bg-slate-100 rounded text-brand-primary cursor-pointer transition-colors text-[11px] font-semibold whitespace-nowrap"
         title="Fit to Screen"
       >
         <Maximize2 class="w-3.5 h-3.5" />
+        <span>Fit</span>
       </button>
     </div>
 

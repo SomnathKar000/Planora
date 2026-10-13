@@ -318,10 +318,11 @@ defineExpose({
       <button
         type="button"
         @click="updateCameraPosition"
-        title="Reset Camera"
-        class="w-7 h-7 rounded-lg flex items-center justify-center text-content-secondary hover:bg-slate-100 hover:text-content-primary transition-colors cursor-pointer"
+        title="Reset Camera View"
+        class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-content-secondary hover:bg-slate-100 hover:text-content-primary text-caption-xs font-semibold transition-colors cursor-pointer whitespace-nowrap"
       >
         <RotateCcw class="w-3.5 h-3.5" />
+        <span>Reset View</span>
       </button>
     </div>
 

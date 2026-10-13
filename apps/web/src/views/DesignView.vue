@@ -327,7 +327,7 @@ function handleDeleteRoom(id: string) {
           <button
             type="button"
             @click="handleOpenStaging"
-            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-brand-primary to-indigo-600 hover:from-brand-primary-hover hover:to-indigo-700 text-white text-caption-xs font-bold shadow-xs transition-all cursor-pointer"
+            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-brand-primary to-indigo-600 hover:from-brand-primary-hover hover:to-indigo-700 text-white text-caption-xs font-bold shadow-xs transition-all cursor-pointer whitespace-nowrap"
           >
             <Sparkles class="w-3.5 h-3.5 text-amber-300" />
             <span>Staging & AI Inpainting</span>

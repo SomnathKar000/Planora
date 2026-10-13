@@ -608,18 +608,20 @@ const currentPreset = computed(() => {
                 type="button"
                 @click="handleRestoreOriginal"
                 title="Restore Original Image"
-                class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 flex items-center justify-center transition-colors cursor-pointer border border-white/10"
+                class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 flex items-center gap-1.5 text-[12px] font-medium transition-colors cursor-pointer border border-white/10 whitespace-nowrap"
               >
                 <RotateCcw class="w-3.5 h-3.5" />
+                <span>Restore</span>
               </button>
 
               <button
                 type="button"
                 @click="handleDownloadImage"
                 title="Download Visual Render"
-                class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 flex items-center justify-center transition-colors cursor-pointer border border-white/10"
+                class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 flex items-center gap-1.5 text-[12px] font-medium transition-colors cursor-pointer border border-white/10 whitespace-nowrap"
               >
                 <Download class="w-3.5 h-3.5" />
+                <span>Download</span>
               </button>
             </div>
           </div>

@@ -1,0 +1,106 @@
+// ────────────────────────────────────────────────────────────────
+// Planora — Prisma Schema
+// ────────────────────────────────────────────────────────────────
+// Maps domain entities to PostgreSQL tables.
+// JSON columns are used for deeply nested layout geometry data
+// (rooms, walls, openings, furniture) that is always read/written
+// as a unit and doesn't need individual SQL queries.
+// ────────────────────────────────────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Project ─────────────────────────────────────────────────────
+
+model Project {
+  id        String   @id @default(cuid())
+  name      String   @db.VarChar(200)
+  type      String   @db.VarChar(20) // room | apartment | house | commercial
+  status    String   @default("draft") @db.VarChar(20)
+
+  // Dimensions (in user's display unit)
+  dimLength Float    @map("dim_length")
+  dimWidth  Float    @map("dim_width")
+  dimHeight Float?   @map("dim_height")
+  unit      String   @default("feet") @db.VarChar(15)
+  floors    Int      @default(1)
+
+  // Design preferences (stored as JSON — small, always read together)
+  preferences Json   @default("{}")
+
+  // Currently selected layout
+  selectedLayoutId String? @map("selected_layout_id")
+
+  // Tag / category
+  tag       String?  @db.VarChar(100)
+
+  // Optimistic concurrency
+  version   Int      @default(1)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  // Relations
+  layouts      Layout[]
+  roomProgram  RoomProgramEntry[]
+
+  @@map("projects")
+}
+
+// ── Room Program Entry ──────────────────────────────────────────
+// User-defined room requests before layout generation
+
+model RoomProgramEntry {
+  id              String  @id @default(cuid())
+  projectId       String  @map("project_id")
+  type            String  @db.VarChar(20)
+  name            String  @db.VarChar(100)
+  count           Int     @default(1)
+  targetArea      Float?  @map("target_area")
+
+  // Optional target dimensions (JSON)
+  targetDimensions Json?  @map("target_dimensions")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("room_program_entries")
+}
+
+// ── Layout ──────────────────────────────────────────────────────
+// Generated floor plan layouts.
+// Geometry data (rooms, walls, openings, furniture) stored as JSON
+// because the layout engine generates/replaces them atomically.
+
+model Layout {
+  id        String   @id @default(cuid())
+  projectId String   @map("project_id")
+  version   Int      @default(1)
+
+  // Outer boundary rect in mm { x, y, width, height }
+  boundary  Json
+
+  // Geometry data — always read/written as a whole unit
+  rooms     Json     @default("[]") // Room[]
+  walls     Json     @default("[]") // Wall[]
+  openings  Json     @default("[]") // Opening[]
+  furniture Json     @default("[]") // Furniture[]
+
+  // Quality score (0–100)
+  score     Float?
+
+  // Validation issues
+  issues    Json?    // LayoutIssue[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("layouts")
+}

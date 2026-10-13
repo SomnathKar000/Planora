@@ -37,9 +37,10 @@ Planora is an AI-assisted floor-plan and interior design application enabling us
 | **Phase 3** | Main CAD Studio workspace (2D SVG + 3D Three.js + Variations) | ✅ **Complete** | `DesignView.vue`, `FloorPlanCanvas.vue`, `ThreeViewport.vue`, `ToolDock.vue`, `CanvasToolbar.vue`, `LayoutVariationsBar.vue`, `CompareModal.vue`, `WorkspaceLeftPanel.vue` |
 | **Phase 4** | Layout Engine & REST API Backend | ✅ **Complete** | `@planora/layout-engine` (`generator.ts`), `@planora/api` (modular: routes → controller → service → repository), Vitest unit tests |
 | **Phase 4.5** | Backend Modular Refactor | ✅ **Complete** | Refactored monolithic `index.ts` into modular layered architecture (see §3 below) |
-| **Phase 5** | Database Persistence (Prisma + PostgreSQL) | ⏳ **Next** | `prisma/schema.prisma`, Docker Compose setup, database migrations |
-| **Phase 6** | High-Res Export (PDF, PNG, SVG) & Advanced Undo/Redo commands | ⏳ Planned | Vector PDF export, image renderer, command pattern history |
-| **Phase 7** | Staging & AI Inpainting / Style Transfer integration | ⏳ Planned | External AI renderer / image generation pipelines |
+| **Phase 5** | Database Persistence (Prisma + PostgreSQL) | ✅ **Complete** | `docker-compose.yml`, Prisma 6 schema (`Project`, `Layout`, `RoomProgramEntry`), `PrismaProjectRepository`, async service/controller, standalone `db:seed` CLI |
+| **Phase 6** | Interactive 2D CAD Editing (Wall dragging, furniture placement) | ⏳ **Next** | Interactive canvas tools, vertex manipulation, object palette |
+| **Phase 7** | High-Res Export (PDF, PNG, SVG) & Undo/Redo commands | ⏳ Planned | Vector PDF export, image renderer, command pattern history |
+| **Phase 8** | Staging & AI Inpainting / Style Transfer integration | ⏳ Planned | External AI renderer / image generation pipelines |
 
 ---
 
@@ -71,11 +72,16 @@ planora/
 │   │   │   ├── styles/main.css            # Tailwind + Design System variables & fonts
 │   │   │   └── router/index.ts            # Vue Router definitions
 │   └── api/                               # Express REST API (Port: 3001)
+│       ├── prisma/
+│       │   ├── schema.prisma              # Prisma schema (Project, Layout, RoomProgramEntry)
+│       │   └── seed.ts                    # Standalone CLI seeder (npm run db:seed)
 │       └── src/
 │           ├── index.ts                   # Server entry point (thin bootstrap)
 │           ├── app.ts                     # Express app factory (middleware, route wiring, DI)
 │           ├── config/
-│           │   └── index.ts               # Centralized runtime config (port, cors, etc.)
+│           │   └── index.ts               # Centralized runtime config (port, cors, databaseUrl)
+│           ├── lib/
+│           │   └── prisma.ts              # PrismaClient singleton with hot-reload guard
 │           ├── middleware/
 │           │   ├── async-handler.ts       # Promise rejection → error middleware bridge
 │           │   ├── error-handler.ts       # Global error handler (AppError → JSON)
@@ -86,13 +92,12 @@ planora/
 │           │   ├── health/
 │           │   │   └── index.ts           # GET /api/health
 │           │   └── projects/
-│           │       ├── project.repository.ts  # IProjectRepository interface + InMemoryImpl
-│           │       ├── project.service.ts     # Business logic (CRUD, layout generation)
-│           │       ├── project.controller.ts  # Thin HTTP→Service bridge
-│           │       ├── project.routes.ts      # Route registration with validation middleware
-│           │       └── index.ts               # Barrel export
-│           ├── seed/
-│           │   └── index.ts               # Demo data seeder (dev mode)
+│           │       ├── project.repository.ts         # IProjectRepository interface + InMemoryImpl
+│           │       ├── project.repository.prisma.ts  # PrismaProjectRepository (PostgreSQL)
+│           │       ├── project.service.ts            # Business logic (CRUD, layout generation)
+│           │       ├── project.controller.ts         # Thin HTTP→Service bridge
+│           │       ├── project.routes.ts             # Route registration with validation middleware
+│           │       └── index.ts                      # Barrel export
 │           └── shared/
 │               ├── errors.ts              # AppError, NotFoundError, ValidationError, ConflictError
 │               ├── response.ts            # sendSuccess, sendPaginated, sendError helpers
@@ -108,6 +113,7 @@ planora/
 │   │   └── src/generator.test.ts          # Vitest unit test suite (Passing)
 │   └── shared-types/                      # Validation & API contracts
 │       └── src/schemas.ts                 # Zod schemas (CreateProject, UpdateProject, etc.)
+├── docker-compose.yml                     # PostgreSQL 16 Alpine container definition
 ├── stitch-ui/                             # UI reference source of truth from Stitch
 ├── docs/
 │   └── architecture.md                    # Core architecture design decisions & coordinates
@@ -117,22 +123,29 @@ planora/
 
 ---
 
-## 4. Backend Architecture (Post-Refactor)
+## 4. Backend Architecture & Storage Layer
 
 The API follows a **modular layered architecture** pattern:
 
 ```
 Request → Middleware (logger, cors, json, validate) → Routes → Controller → Service → Repository
-                                                                                        ↕
-                                                                              In-Memory Map (swap to DB later)
+                                                                                        │
+                                                  ┌─────────────────────────────────────┴────────────────────────┐
+                                                  ▼                                                              ▼
+                                  PrismaProjectRepository                                      InMemoryProjectRepository
+                                  (Active when DATABASE_URL is set)                            (Fallback for lightweight dev/tests)
+                                                  │
+                                                  ▼
+                                      PostgreSQL (via Prisma 6)
 ```
 
 **Key Design Decisions:**
-1. **App Factory Pattern** (`app.ts`): Creates and wires everything, returns the Express app. Testable independently without starting a server.
-2. **Interface-Based Repository** (`IProjectRepository`): Abstracts storage so swapping InMemory → Prisma/Postgres requires only a new implementation, no service or controller changes.
-3. **Typed Error Hierarchy** (`AppError`, `NotFoundError`, `ValidationError`, `ConflictError`): Services throw typed errors; the global error handler renders structured JSON responses.
-4. **Reusable Validation Middleware** (`validate(schema)`): Controllers receive pre-validated, pre-parsed data — no manual `safeParse` calls.
-5. **Async Handler Wrapper**: Catches Promise rejections from async controllers and forwards them to the error middleware — no try/catch boilerplate.
+1. **App Factory Pattern** (`app.ts`): Creates and wires everything, dynamically selecting `PrismaProjectRepository` or `InMemoryProjectRepository`. Testable independently without starting a server.
+2. **Interface-Based Repository** (`IProjectRepository`): All methods return Promises (`getById`, `list`, `create`, `update`, `delete`, `saveLayouts`). Storage implementation is completely decoupled from business logic.
+3. **Explicit Database Seeding**: Auto-seeding on server start was removed in favor of a standalone CLI script (`apps/api/prisma/seed.ts` via `npm run db:seed`), preventing unexpected duplicate data or startup delays.
+4. **Typed Error Hierarchy** (`AppError`, `NotFoundError`, `ValidationError`, `ConflictError`): Services throw typed errors; the global error handler renders structured JSON responses.
+5. **Reusable Validation Middleware** (`validate(schema)`): Controllers receive pre-validated, pre-parsed data — no manual `safeParse` calls.
+6. **Async Handler Wrapper**: Catches Promise rejections from async controllers and forwards them to the error middleware — no try/catch boilerplate.
 
 ---
 
@@ -156,19 +169,40 @@ Request → Middleware (logger, cors, json, validate) → Routes → Controller 
 Run from the monorepo root:
 
 ```bash
+# ── Applications ──────────────────────────────────────────────
 # 1. Start Frontend Dev Server (Vite) -> http://localhost:5173
 npm run dev:web
 
 # 2. Start Backend API Dev Server (tsx) -> http://localhost:3001
 npm run dev:api
 
-# 3. Build All Packages & Applications (Clean 0-error build)
+# ── Database & Prisma ──────────────────────────────────────────
+# Start PostgreSQL via Docker Compose
+npm run db:up
+
+# Stop PostgreSQL
+npm run db:down
+
+# Run migrations (or sync schema)
+npm run db:migrate
+
+# Seed demo projects into PostgreSQL
+npm run db:seed
+
+# Open Prisma Studio GUI
+npm run db:studio
+
+# One-command full DB spin-up & seed
+npm run db:setup
+
+# ── Verification & Quality ─────────────────────────────────────
+# Build All Packages & Applications (Clean 0-error build)
 npm run build
 
-# 4. Run TypeScript Check Across All Workspaces
+# Run TypeScript Check Across All Workspaces
 npm run typecheck
 
-# 5. Run Unit Tests (Vitest)
+# Run Unit Tests (Vitest)
 npm run test
 ```
 
@@ -176,13 +210,12 @@ npm run test
 
 ## 7. Next Steps for Upcoming Sessions
 
-1. **Database Integration**:
-   - Add Prisma schema in `prisma/schema.prisma` matching `@planora/domain` entities.
-   - Implement `PrismaProjectRepository` that implements `IProjectRepository`.
-   - Connect PostgreSQL database in `apps/api` with fallback to in-memory/SQLite.
-2. **Advanced 2D Editing Tools**:
-   - Implement interactive wall dragging / room dimension resizing on the 2D SVG canvas.
-   - Add drag-and-drop furniture placement from a furniture palette.
-3. **High-Res Blueprint Export**:
+1. **Interactive 2D CAD Editing**:
+   - Implement interactive wall dragging / room dimension resizing on the 2D SVG canvas (`FloorPlanCanvas.vue`).
+   - Add drag-and-drop furniture placement from a furniture catalog/palette.
+   - Add vertex selection, split wall, and door/window repositioning.
+2. **High-Res Blueprint Export**:
    - Export 2D layout as printable vector SVG / PDF blueprint with title block and scale bar.
    - Export 3D viewport canvas screenshot to high-res PNG.
+3. **AI Layout Assistant**:
+   - Add natural language layout modification prompts (e.g., "Add an en-suite bathroom", "Maximize natural light in the living room").

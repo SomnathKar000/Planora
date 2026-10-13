@@ -6,15 +6,18 @@ import type { Project } from '@planora/domain';
 
 /**
  * Repository interface — abstracts storage so we can swap
- * in-memory for Postgres/SQLite later without touching services.
+ * in-memory for Postgres/Prisma later without touching services.
+ *
+ * All methods return Promises to support both sync (in-memory)
+ * and async (database) implementations.
  */
 export interface IProjectRepository {
-  findAll(): Project[];
-  findById(id: string): Project | undefined;
-  create(project: Project): Project;
-  update(project: Project): Project;
-  delete(id: string): boolean;
-  exists(id: string): boolean;
+  findAll(): Promise<Project[]>;
+  findById(id: string): Promise<Project | undefined>;
+  create(project: Project): Promise<Project>;
+  update(project: Project): Promise<Project>;
+  delete(id: string): Promise<boolean>;
+  exists(id: string): Promise<boolean>;
   nextId(): string;
 }
 
@@ -23,29 +26,29 @@ export interface IProjectRepository {
 export class InMemoryProjectRepository implements IProjectRepository {
   private readonly store: Map<string, Project> = new Map();
 
-  findAll(): Project[] {
+  async findAll(): Promise<Project[]> {
     return Array.from(this.store.values());
   }
 
-  findById(id: string): Project | undefined {
+  async findById(id: string): Promise<Project | undefined> {
     return this.store.get(id);
   }
 
-  create(project: Project): Project {
+  async create(project: Project): Promise<Project> {
     this.store.set(project.id, project);
     return project;
   }
 
-  update(project: Project): Project {
+  async update(project: Project): Promise<Project> {
     this.store.set(project.id, project);
     return project;
   }
 
-  delete(id: string): boolean {
+  async delete(id: string): Promise<boolean> {
     return this.store.delete(id);
   }
 
-  exists(id: string): boolean {
+  async exists(id: string): Promise<boolean> {
     return this.store.has(id);
   }
 

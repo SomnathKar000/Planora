@@ -22,19 +22,19 @@ export class ProjectService {
 
   // ── Queries ────────────────────────────────────────────────
 
-  listProjects(): Project[] {
+  async listProjects(): Promise<Project[]> {
     return this.repo.findAll();
   }
 
-  getProject(id: string): Project {
-    const project = this.repo.findById(id);
+  async getProject(id: string): Promise<Project> {
+    const project = await this.repo.findById(id);
     if (!project) throw new NotFoundError('Project', id);
     return project;
   }
 
   // ── Commands ───────────────────────────────────────────────
 
-  createProject(input: CreateProjectInput): Project {
+  async createProject(input: CreateProjectInput): Promise<Project> {
     const projectId = this.repo.nextId();
     const now = new Date().toISOString();
 
@@ -73,8 +73,8 @@ export class ProjectService {
     return this.repo.create(project);
   }
 
-  updateProject(id: string, input: UpdateProjectInput): Project {
-    const existing = this.repo.findById(id);
+  async updateProject(id: string, input: UpdateProjectInput): Promise<Project> {
+    const existing = await this.repo.findById(id);
     if (!existing) throw new NotFoundError('Project', id);
 
     // Optimistic concurrency check
@@ -100,15 +100,15 @@ export class ProjectService {
     return this.repo.update(updated);
   }
 
-  deleteProject(id: string): void {
-    if (!this.repo.exists(id)) throw new NotFoundError('Project', id);
-    this.repo.delete(id);
+  async deleteProject(id: string): Promise<void> {
+    if (!(await this.repo.exists(id))) throw new NotFoundError('Project', id);
+    await this.repo.delete(id);
   }
 
   // ── Layout Generation ──────────────────────────────────────
 
-  generateLayouts(id: string, candidateCount?: number): { layouts: any[]; selectedLayoutId: string | undefined } {
-    const project = this.repo.findById(id);
+  async generateLayouts(id: string, candidateCount?: number): Promise<{ layouts: any[]; selectedLayoutId: string | undefined }> {
+    const project = await this.repo.findById(id);
     if (!project) throw new NotFoundError('Project', id);
 
     const count = candidateCount ?? config.layout.defaultCandidateCount;
@@ -124,7 +124,7 @@ export class ProjectService {
     project.layouts = layouts;
     project.selectedLayoutId = layouts[0]?.id;
     project.updatedAt = new Date().toISOString();
-    this.repo.update(project);
+    await this.repo.update(project);
 
     return { layouts, selectedLayoutId: project.selectedLayoutId };
   }

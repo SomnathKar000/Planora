@@ -5,6 +5,7 @@
 export const config = {
   port: Number(process.env.API_PORT ?? 3001),
   env: process.env.NODE_ENV ?? 'development',
+  databaseUrl: process.env.DATABASE_URL,
   cors: {
     origin: process.env.CORS_ORIGIN ?? '*',
   },

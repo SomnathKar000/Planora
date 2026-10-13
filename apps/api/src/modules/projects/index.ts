@@ -4,6 +4,7 @@
 
 export { InMemoryProjectRepository } from './project.repository.js';
 export type { IProjectRepository } from './project.repository.js';
+export { PrismaProjectRepository } from './project.repository.prisma.js';
 export { ProjectService } from './project.service.js';
 export { ProjectController } from './project.controller.js';
 export { registerProjectRoutes } from './project.routes.js';

@@ -8,6 +8,7 @@ import {
   Wand2,
   Trash2,
   Download,
+  Sparkles,
 } from '@lucide/vue';
 
 export type ViewMode = '2d' | '3d' | 'walkthrough';
@@ -25,6 +26,7 @@ const emit = defineEmits<{
   (e: 'auto-arrange'): void;
   (e: 'clear'): void;
   (e: 'download'): void;
+  (e: 'open-staging'): void;
 }>();
 </script>
 
@@ -112,6 +114,15 @@ const emit = defineEmits<{
       >
         <Trash2 class="w-4 h-4" />
         <span class="hidden sm:inline">Clear</span>
+      </button>
+
+      <button
+        type="button"
+        @click="emit('open-staging')"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-brand-primary to-indigo-600 hover:from-brand-primary-hover hover:to-indigo-700 text-white text-label-sm font-semibold shadow-xs transition-all cursor-pointer"
+      >
+        <Sparkles class="w-4 h-4 text-amber-300" />
+        <span>Staging & AI</span>
       </button>
 
       <span class="w-px h-4 bg-border-hairline mx-1 hidden sm:inline" />

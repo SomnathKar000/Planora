@@ -13,7 +13,16 @@ export const RoomTypeSchema = z.enum([
   'home_office', 'balcony', 'hallway', 'closet', 'laundry',
   'entry_hall', 'storage', 'garage', 'custom',
 ]);
-export const DesignStyleSchema = z.enum(['modern', 'minimal', 'classic', 'industrial', 'nordic', 'custom']);
+export const DesignStyleSchema = z.enum([
+  'modern',
+  'minimal',
+  'classic',
+  'industrial',
+  'nordic',
+  'scandinavian',
+  'minimalist',
+  'custom',
+]);
 export const FurnitureDensitySchema = z.enum(['sparse', 'balanced', 'dense']);
 export const ProjectStatusSchema = z.enum([
   'draft', 'in_progress', 'client_review', 'staging_ready', 'approved', 'complete',
@@ -72,6 +81,26 @@ export const GenerateLayoutSchema = z.object({
   candidateCount: z.number().int().min(1).max(10).default(3),
 });
 
+// ── Staging & AI Inpainting Schemas ─────────────────────────────
+
+export const ProceduralStagingRequestSchema = z.object({
+  projectId: z.string(),
+  layoutId: z.string().optional(),
+  style: DesignStyleSchema,
+  density: FurnitureDensitySchema.optional(),
+  preserveExistingFurniture: z.boolean().optional(),
+});
+
+export const AiImageEditRequestSchema = z.object({
+  projectId: z.string().optional(),
+  image: z.string().min(1, 'Source image is required'), // Base64 data URL or HTTP URL
+  mask: z.string().optional(), // Optional binary mask
+  prompt: z.string().min(1, 'Prompt is required').max(1000),
+  negativePrompt: z.string().max(1000).optional(),
+  style: DesignStyleSchema.optional(),
+  guidanceScale: z.number().min(1).max(20).optional(),
+});
+
 // ── API Response Types ──────────────────────────────────────────
 
 export interface ApiResponse<T> {
@@ -98,3 +127,6 @@ export interface PaginatedResponse<T> {
 export type CreateProjectInput = z.infer<typeof CreateProjectSchema>;
 export type UpdateProjectInput = z.infer<typeof UpdateProjectSchema>;
 export type GenerateLayoutInput = z.infer<typeof GenerateLayoutSchema>;
+export type ProceduralStagingInput = z.input<typeof ProceduralStagingRequestSchema>;
+export type AiImageEditInput = z.input<typeof AiImageEditRequestSchema>;
+

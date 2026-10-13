@@ -40,7 +40,7 @@ Planora is an AI-assisted floor-plan and interior design application enabling us
 | **Phase 5** | Database Persistence (Prisma + PostgreSQL) | ✅ **Complete** | `docker-compose.yml`, Prisma 6 schema (`Project`, `Layout`, `RoomProgramEntry`), `PrismaProjectRepository`, async service/controller, standalone `db:seed` CLI |
 | **Phase 6** | Interactive 2D CAD Studio Editing | ✅ **Complete** | Pointer dragging & snapping, room vertex resize handles, wall drafting, door/window fixture placement, `FurnitureCatalogModal.vue`, `ObjectInspector.vue`, full Undo/Redo history (⌘Z/⌘⇧Z), real-time 3D Three.js sync |
 | **Phase 7** | High-Res Blueprint & 3D Export (PDF, PNG, SVG) | ✅ **Complete** | Vector PDF blueprint with title block, North arrow, scale & room schedule (`exportBlueprint.ts`), `ExportModal.vue` (PDF, SVG, 3D PNG, JSON), WebGL buffer capture (`ThreeViewport.vue`) |
-| **Phase 8** | Staging & AI Inpainting / Style Transfer integration | ⏳ **Next** | Generative interior staging inpainting, photorealistic style transfer presets, client showcase mode |
+| **Phase 8** | Staging & AI Inpainting (Procedural + Neural) | ✅ **Complete** | Deterministic procedural staging layout engine (`stageLayout`, 5 presets), provider-independent image edit interface, Replicate FLUX.1 Kontext Pro provider + in-memory mock provider, rate limiting & quota manager, `StagingWorkspaceModal.vue` with Before/After split comparison, mask canvas brush, prompt keywords, result history & download |
 
 ---
 
@@ -160,14 +160,36 @@ Request → Middleware (logger, cors, json, validate) → Routes → Controller 
 2. **Canonical Data Model**:
    - A single `Layout` object is the source of truth for both 2D SVG canvas and 3D Three.js viewport.
    - Room boundaries, structural walls, doors/windows, and furniture objects are synchronized.
-3. **No Framework Dependencies in Core Packages**:
+3. **Procedural Staging as Source of Truth**:
+   - Procedural staging in `@planora/layout-engine` runs 100% offline using deterministic room bounding boxes, door/window clearances, and collision avoidance corridors.
+   - AI-generated photorealistic images are visual styling explorations only — structured floor plans and CAD dimensions are strictly preserved.
+4. **Provider-Independent AI Architecture**:
+   - `IImageEditProvider` decouples the API from underlying providers.
+   - Configurable server-side model (`FLUX_STAGING_MODEL`, default `black-forest-labs/flux-fill-pro` on Replicate).
+   - In-memory `MockImageEditProvider` provides offline simulation without requiring API keys.
+   - API tokens never leak to the client; all inpainting requests proxy through `/api/staging/ai`.
+5. **No Framework Dependencies in Core Packages**:
    - `@planora/domain` and `@planora/layout-engine` must never import Vue, React, Express, or Three.js.
-4. **Three.js Resource Management**:
+6. **Three.js Resource Management**:
    - Any Three.js scene must properly call `renderer.dispose()` and cancel `requestAnimationFrame` on unmount to avoid WebGL context leaks (handled in `ThreeViewport.vue`).
 
 ---
 
-## 6. Verified Development Commands
+## 6. Phase 8 Staging & Inpainting API Reference
+
+Base URL prefix: `/api/staging`
+
+| Method | Endpoint | Description | Input / Output |
+|---|---|---|---|
+| `GET` | `/presets` | Lists all 5 core architectural style presets (materials, floor tones, lighting moods, keywords) | Returns `{ presets: StagingPreset[], provider: string }` |
+| `POST` | `/procedural` | Runs deterministic 2D room-geometry staging and updates project layout | Body: `ProceduralStagingInput` (`projectId`, `style`, `density`) |
+| `POST` | `/ai/edit` | Submits an asynchronous image edit / inpainting job | Body: `AiImageEditInput` (`image`, optional `mask`, `prompt`, `style`, `guidanceScale`) |
+| `GET` | `/ai/jobs/:jobId` | Polls progress and status of an in-flight job | Returns `ImageEditJob` (`status`: `pending` \| `processing` \| `succeeded` \| `failed` \| `cancelled`, `progress`, `resultImageUrl`) |
+| `POST` | `/ai/jobs/:jobId/cancel` | Cancels an active in-flight inpainting job | Returns `{ success: boolean, message: string }` |
+
+---
+
+## 7. Verified Development Commands
 
 Run from the monorepo root:
 
@@ -205,20 +227,20 @@ npm run build
 # Run TypeScript Check Across All Workspaces
 npm run typecheck
 
-# Run Unit Tests (Vitest)
+# Run Unit Tests (Vitest) - 100% passing across domain, layout-engine, api
 npm run test
 ```
 
 ---
 
-## 7. Next Steps for Upcoming Sessions
+## 8. Next Steps for Upcoming Sessions
 
-1. **AI Interior Staging & Presentation Renders (Phase 8 - Next)**:
-   - Perspective camera shot selection from the 3D scene (Living Room angle, Primary Bedroom view, Kitchen perspective).
-   - Generative interior staging inpainting and realistic furniture texture synthesis.
-   - Client Presentation Mode (full-screen immersive gallery with light/dark staging comparisons).
+1. **Client Presentation Showcase & Walkthrough Mode**:
+   - Fullscreen presentation view comparing multiple generated staging renders.
+   - Interactive camera hotspots linking 3D floor plan rooms directly to staged perspective camera angles.
 2. **Advanced Wall Partitioning & Dimension Ticks**:
    - Multi-vertex wall chain drawing and automated room polygon auto-detection.
    - Dimension annotations tool with interactive dimension lines.
 3. **Multi-Floor Building Stack**:
    - Floor selector tab (Ground Floor, Level 1, Penthouse) with vertical staircase/elevator alignment.
+

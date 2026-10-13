@@ -71,6 +71,8 @@ export interface Furniture {
   depth: number;    // mm
   height: number;   // mm
   roomId?: string;
+  material?: string; // e.g. 'oak' | 'walnut' | 'leather' | 'linen' | 'metal' | 'boucle'
+  color?: string;    // hex or css color
 }
 
 // ── Design Preferences ──────────────────────────────────────────
@@ -148,6 +150,37 @@ export interface RoomProgramEntry {
   targetArea?: number;
   /** Target dimensions in display units */
   targetDimensions?: Dimensions;
+}
+
+// ── Staging Entities ────────────────────────────────────────────
+
+export interface StagingPreset {
+  id: string;
+  name: string;
+  style: DesignStyle;
+  description: string;
+  primaryMaterial: string;
+  secondaryMaterial: string;
+  wallTone: string;
+  floorTone: string;
+  accentColors: string[];
+  lightingMood: 'golden' | 'noon' | 'evening';
+  promptKeywords: string[];
+}
+
+export interface ProceduralStagingOptions {
+  style: DesignStyle;
+  density?: FurnitureDensity;
+  clearanceMm?: number;
+  preserveExistingFurniture?: boolean;
+}
+
+export interface ProceduralStagingResult {
+  layout: Layout;
+  stagedItemCount: number;
+  clearedCirculationPaths: boolean;
+  appliedPreset: StagingPreset;
+  score: number;
 }
 
 // ── Re-exports ──────────────────────────────────────────────────

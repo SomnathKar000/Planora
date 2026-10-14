@@ -946,10 +946,10 @@ const currentPreset = computed(() => {
               v-if="activeTab === 'procedural'"
               type="button"
               @click="handleApplyProceduralStaging"
-              class="w-full py-3 rounded-xl bg-brand-primary hover:bg-brand-primary-hover text-white font-label-md font-bold shadow-md shadow-brand-primary/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
+              class="w-full py-3 rounded-xl bg-primary hover:bg-primary-hover active:bg-blue-800 text-white font-semibold text-body-md shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
-              <Layers class="w-4 h-4" />
-              <span>Apply Procedural Staging to CAD</span>
+              <Layers class="w-4 h-4 shrink-0 text-white" />
+              <span class="font-bold tracking-tight text-white">Apply Procedural Staging to CAD</span>
             </button>
 
             <!-- AI Generate Button -->
@@ -958,10 +958,10 @@ const currentPreset = computed(() => {
               type="button"
               :disabled="isGenerating"
               @click="handleGenerateAiEdit"
-              class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-brand-primary hover:from-indigo-700 hover:to-brand-primary-hover text-white font-label-md font-bold shadow-md shadow-indigo-500/20 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-primary hover:from-indigo-700 hover:to-primary-hover text-white font-semibold text-body-md shadow-md flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              <Sparkles class="w-4 h-4" />
-              <span>{{ isGenerating ? 'Generating Staging Preview...' : 'Generate Photorealistic AI Inpaint' }}</span>
+              <Sparkles class="w-4 h-4 shrink-0 text-white" />
+              <span class="font-bold tracking-tight text-white">{{ isGenerating ? 'Generating Staging Preview...' : 'Generate Photorealistic AI Inpaint' }}</span>
             </button>
 
             <button

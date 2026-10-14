@@ -22,6 +22,7 @@ import {
   CheckCircle2,
   FolderOpen,
   Sparkles,
+  ArrowLeft,
 } from '@lucide/vue';
 
 const route = useRoute();
@@ -481,9 +482,10 @@ function handleDeleteRoom(id: string) {
     </p>
     <router-link
       to="/projects"
-      class="px-5 py-2.5 rounded-xl bg-brand-primary text-white font-label-md shadow-md hover:bg-brand-primary-hover transition-colors"
+      class="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-primary hover:bg-primary-hover active:bg-blue-800 text-white font-semibold text-body-md shadow-md hover:shadow-lg transition-all cursor-pointer group"
     >
-      Back to Projects
+      <ArrowLeft class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform shrink-0 text-white" />
+      <span class="font-bold tracking-tight text-white">Back to Projects</span>
     </router-link>
   </div>
 </template>

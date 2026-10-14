@@ -183,6 +183,30 @@ export interface ProceduralStagingResult {
   score: number;
 }
 
+// ── User & Auth ──────────────────────────────────────────────────
+
+export type SpatialFocus =
+  | 'Architectural Practice / BIM CAD'
+  | 'Interior Designer & Space Planner'
+  | 'Real Estate Development / Staging'
+  | 'Homeowner / Residential Renovation';
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: SpatialFocus | string;
+  avatarUrl?: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface AuthSession {
+  user: User;
+  token: string;
+  expiresAt: string;
+}
+
 // ── Re-exports ──────────────────────────────────────────────────
 
 export type {

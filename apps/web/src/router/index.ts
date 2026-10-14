@@ -31,6 +31,18 @@ const routes: RouteRecordRaw[] = [
     meta: { title: 'Saved Designs — Planora' },
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/AuthView.vue'),
+    meta: { title: 'Sign In — Planora' },
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: () => import('@/views/AuthView.vue'),
+    meta: { title: 'Create Account — Planora' },
+  },
+  {
     path: '/settings',
     name: 'settings',
     component: () => import('@/views/SettingsView.vue'),

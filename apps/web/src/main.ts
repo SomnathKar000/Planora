@@ -6,7 +6,13 @@ import './styles/main.css';
 
 const app = createApp(App);
 
-app.use(createPinia());
+const pinia = createPinia();
+app.use(pinia);
 app.use(router);
 
+// Initialize persisted auth session
+import { useAuthStore } from './stores/auth';
+useAuthStore().initAuth();
+
 app.mount('#app');
+

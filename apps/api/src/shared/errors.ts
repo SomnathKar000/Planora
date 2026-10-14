@@ -34,3 +34,18 @@ export class ConflictError extends AppError {
     this.name = 'ConflictError';
   }
 }
+
+export class UnauthorizedError extends AppError {
+  constructor(message: string = 'Authentication required or invalid credentials') {
+    super(401, 'UNAUTHORIZED', message);
+    this.name = 'UnauthorizedError';
+  }
+}
+
+export class ForbiddenError extends AppError {
+  constructor(message: string = 'Access denied') {
+    super(403, 'FORBIDDEN', message);
+    this.name = 'ForbiddenError';
+  }
+}
+

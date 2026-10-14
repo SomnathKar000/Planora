@@ -26,6 +26,14 @@ import {
   ReplicateProvider,
   type IImageEditProvider,
 } from './modules/staging/index.js';
+import {
+  AuthService,
+  AuthController,
+  createAuthRouter,
+  createAuthMiddleware,
+  InMemoryUserRepository,
+  PrismaUserRepository,
+} from './modules/auth/index.js';
 import { PrismaProjectRepository } from './modules/projects/project.repository.prisma.js';
 import { prisma } from './lib/prisma.js';
 
@@ -43,6 +51,14 @@ export function createApp() {
   const projectRepo = usePrisma
     ? new PrismaProjectRepository(prisma)
     : new InMemoryProjectRepository();
+
+  const userRepo = usePrisma
+    ? new PrismaUserRepository()
+    : new InMemoryUserRepository();
+
+  const authService = new AuthService(userRepo);
+  const authController = new AuthController(authService);
+  const authMiddleware = createAuthMiddleware(authService);
 
   const projectService = new ProjectService(projectRepo);
   const projectController = new ProjectController(projectService);
@@ -75,6 +91,10 @@ export function createApp() {
   // Health
   registerHealthRoutes(apiRouter);
 
+  // Auth (Registration, Login, User profile)
+  const authRouter = createAuthRouter(authController, authMiddleware);
+  apiRouter.use('/auth', authRouter);
+
   // Projects
   const projectRouter = Router();
   registerProjectRoutes(projectRouter, projectController);
@@ -91,6 +111,6 @@ export function createApp() {
   // ── Error Handling (must be last) ───────────────────────────
   app.use(errorHandler);
 
-  return { app, projectRepo, projectService, stagingService };
+  return { app, projectRepo, projectService, stagingService, userRepo, authService };
 }
 

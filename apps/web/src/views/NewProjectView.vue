@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { useProjectsStore } from '@/stores/projects';
+import { ARCHITECTURAL_TEMPLATES, type ArchitecturalTemplate } from '@/data/templates';
 import {
   ProjectType,
   MeasurementUnit,
@@ -25,9 +26,14 @@ import {
   ChevronRight,
   FileText,
   Tag,
+  LayoutGrid,
+  Sparkles,
+  X,
+  Check,
 } from '@lucide/vue';
 
 const router = useRouter();
+const route = useRoute();
 const store = useProjectsStore();
 
 // Form State
@@ -56,6 +62,33 @@ const isSubmitting = ref(false);
 
 // Active Wizard Step
 const activeStep = ref(1);
+
+// Template Picker Modal State
+const isTemplateModalOpen = ref(false);
+const activeTemplate = ref<ArchitecturalTemplate | null>(null);
+const templateModalCategory = ref<'All' | 'Apartments' | 'Houses' | 'Lofts' | 'Commercial'>('All');
+
+const modalFilteredTemplates = computed(() => {
+  if (templateModalCategory.value === 'All') return ARCHITECTURAL_TEMPLATES;
+  return ARCHITECTURAL_TEMPLATES.filter(t => t.category === templateModalCategory.value);
+});
+
+function applyTemplate(tpl: ArchitecturalTemplate) {
+  activeTemplate.value = tpl;
+  projectName.value = tpl.name;
+  projectTag.value = `${tpl.tag} Template`;
+  archetype.value = tpl.archetype;
+  length.value = tpl.dimensions.length;
+  width.value = tpl.dimensions.width;
+  height.value = tpl.dimensions.height;
+  unit.value = tpl.unit;
+  floors.value = tpl.floors;
+  style.value = tpl.style;
+  density.value = tpl.density;
+  paletteAccents.value = [...tpl.paletteAccents];
+  roomProgram.value = JSON.parse(JSON.stringify(tpl.roomProgram));
+  isTemplateModalOpen.value = false;
+}
 
 // Switch Unit between Feet and Meters
 function setUnit(newUnit: MeasurementUnit) {
@@ -183,6 +216,14 @@ function handleKeyDown(e: KeyboardEvent) {
 
 onMounted(() => {
   window.addEventListener('keydown', handleKeyDown);
+
+  const templateId = route.query.template as string | undefined;
+  if (templateId) {
+    const found = ARCHITECTURAL_TEMPLATES.find((t) => t.id === templateId);
+    if (found) {
+      applyTemplate(found);
+    }
+  }
 });
 
 onUnmounted(() => {
@@ -279,33 +320,64 @@ onUnmounted(() => {
                 <h2 class="text-title-sm font-semibold text-content-primary">1. Project Metadata</h2>
               </div>
 
-              <!-- Imperial vs Metric Segmented Control -->
-              <div class="flex items-center bg-surface-subtle p-1 rounded-lg border border-border-hairline text-caption-xs font-semibold">
+              <div class="flex items-center gap-2">
                 <button
                   type="button"
-                  @click="setUnit(MeasurementUnit.Feet)"
-                  class="px-3 py-1 rounded-md transition-all cursor-pointer"
-                  :class="[
-                    unit === MeasurementUnit.Feet
-                      ? 'bg-white text-brand-primary font-bold shadow-2xs'
-                      : 'text-content-secondary hover:text-content-primary'
-                  ]"
+                  @click="isTemplateModalOpen = true"
+                  class="h-8 px-3 rounded-lg bg-blue-50 hover:bg-blue-100 text-brand-primary border border-blue-200 text-caption-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
-                  Imperial (ft / in)
+                  <LayoutGrid class="w-3.5 h-3.5" />
+                  <span>Load Blueprint</span>
                 </button>
-                <button
-                  type="button"
-                  @click="setUnit(MeasurementUnit.Meters)"
-                  class="px-3 py-1 rounded-md transition-all cursor-pointer"
-                  :class="[
-                    unit === MeasurementUnit.Meters
-                      ? 'bg-white text-brand-primary font-bold shadow-2xs'
-                      : 'text-content-secondary hover:text-content-primary'
-                  ]"
-                >
-                  Metric (m / cm)
-                </button>
+
+                <!-- Imperial vs Metric Segmented Control -->
+                <div class="flex items-center bg-surface-subtle p-1 rounded-lg border border-border-hairline text-caption-xs font-semibold">
+                  <button
+                    type="button"
+                    @click="setUnit(MeasurementUnit.Feet)"
+                    class="px-3 py-1 rounded-md transition-all cursor-pointer"
+                    :class="[
+                      unit === MeasurementUnit.Feet
+                        ? 'bg-white text-brand-primary font-bold shadow-2xs'
+                        : 'text-content-secondary hover:text-content-primary'
+                    ]"
+                  >
+                    Imperial (ft / in)
+                  </button>
+                  <button
+                    type="button"
+                    @click="setUnit(MeasurementUnit.Meters)"
+                    class="px-3 py-1 rounded-md transition-all cursor-pointer"
+                    :class="[
+                      unit === MeasurementUnit.Meters
+                        ? 'bg-white text-brand-primary font-bold shadow-2xs'
+                        : 'text-content-secondary hover:text-content-primary'
+                    ]"
+                  >
+                    Metric (m / cm)
+                  </button>
+                </div>
               </div>
+            </div>
+
+            <!-- Active Blueprint Indicator Banner -->
+            <div
+              v-if="activeTemplate"
+              class="bg-blue-50/70 border border-blue-200 rounded-xl p-3 flex items-center justify-between gap-3 text-caption-sm text-blue-900"
+            >
+              <div class="flex items-center gap-2">
+                <Sparkles class="w-4 h-4 text-blue-600 shrink-0" />
+                <span>
+                  Blueprint Active: <strong>{{ activeTemplate.name }}</strong> ({{ activeTemplate.areaSqFt }} sq ft • {{ activeTemplate.details }})
+                </span>
+              </div>
+              <button
+                type="button"
+                @click="isTemplateModalOpen = true"
+                class="text-caption-xs font-semibold text-blue-700 hover:text-blue-900 underline shrink-0 cursor-pointer"
+              >
+                Switch Blueprint
+              </button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -377,6 +449,157 @@ onUnmounted(() => {
             @save-draft="handleSaveDraft"
             @cancel="handleCancel"
           />
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Template Picker Modal ────────────────────────────────────── -->
+    <div
+      v-if="isTemplateModalOpen"
+      class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+      @click.self="isTemplateModalOpen = false"
+    >
+      <div
+        class="bg-surface-card rounded-2xl max-w-4xl w-full border border-border-hairline shadow-level-3 overflow-hidden flex flex-col max-h-[85vh] animate-scale-in"
+      >
+        <!-- Modal Header -->
+        <div class="px-6 py-4 border-b border-border-hairline flex items-center justify-between bg-surface-card">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded text-caption-xs font-semibold bg-blue-50 text-brand-primary border border-blue-200">
+                11 Parametric Blueprints
+              </span>
+              <h3 class="text-headline-md font-bold text-content-primary">
+                Select Architectural Blueprint
+              </h3>
+            </div>
+            <p class="text-caption-sm text-content-secondary mt-0.5">
+              Choose a validated floor plan archetype to automatically populate geometry and spatial room programs.
+            </p>
+          </div>
+          <button
+            type="button"
+            @click="isTemplateModalOpen = false"
+            class="p-1.5 rounded-lg text-content-muted hover:text-content-primary hover:bg-surface-subtle cursor-pointer"
+          >
+            <X class="w-5 h-5" />
+          </button>
+        </div>
+
+        <!-- Modal Category Filter -->
+        <div class="px-6 py-3 border-b border-border-hairline bg-surface-subtle flex items-center gap-2 overflow-x-auto">
+          <button
+            v-for="cat in (['All', 'Apartments', 'Houses', 'Lofts', 'Commercial'] as const)"
+            :key="cat"
+            type="button"
+            @click="templateModalCategory = cat"
+            class="px-3 py-1.5 rounded-lg text-caption-sm font-semibold transition-all cursor-pointer shrink-0"
+            :class="
+              templateModalCategory === cat
+                ? 'bg-brand-primary text-white shadow-2xs'
+                : 'bg-white text-content-secondary hover:text-content-primary border border-border-hairline'
+            "
+          >
+            {{ cat }}
+          </button>
+        </div>
+
+        <!-- Modal Cards Grid -->
+        <div class="p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div
+            v-for="tpl in modalFilteredTemplates"
+            :key="tpl.id"
+            class="panel border border-border-hairline hover:border-brand-primary hover:shadow-card transition-all flex flex-col justify-between overflow-hidden group cursor-pointer"
+            :class="activeTemplate?.id === tpl.id ? 'ring-2 ring-brand-primary border-brand-primary' : ''"
+            @click="applyTemplate(tpl)"
+          >
+            <div>
+              <!-- SVG preview header -->
+              <div class="h-32 bg-slate-50 p-2 border-b border-border-hairline relative">
+                <span class="badge bg-white/95 text-content-primary text-[10px] font-semibold absolute top-2 right-2 border border-border-hairline">
+                  {{ tpl.areaSqFt }} sq ft
+                </span>
+                <svg
+                  class="w-full h-full"
+                  :viewBox="tpl.svgPreview.viewBox"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    v-for="room in tpl.svgPreview.rooms"
+                    :key="room.name"
+                    :x="room.x"
+                    :y="room.y"
+                    :width="room.w"
+                    :height="room.h"
+                    :fill="room.color"
+                    stroke="#94A3B8"
+                    stroke-width="0.75"
+                    rx="2"
+                  />
+                  <text
+                    v-for="room in tpl.svgPreview.rooms"
+                    :key="'t-' + room.name"
+                    :x="room.x + room.w / 2"
+                    :y="room.y + room.h / 2 + 3"
+                    text-anchor="middle"
+                    font-size="8.5"
+                    font-weight="600"
+                    fill="#475569"
+                    font-family="Plus Jakarta Sans, sans-serif"
+                  >
+                    {{ room.name }}
+                  </text>
+                </svg>
+              </div>
+
+              <!-- Content -->
+              <div class="p-3.5">
+                <div class="flex items-center justify-between">
+                  <h4 class="text-label-md font-bold text-content-primary group-hover:text-brand-primary transition-colors">
+                    {{ tpl.name }}
+                  </h4>
+                  <span
+                    v-if="activeTemplate?.id === tpl.id"
+                    class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0"
+                  >
+                    <Check class="w-3 h-3" />
+                  </span>
+                </div>
+                <p class="text-[11px] text-content-secondary mt-0.5">
+                  {{ tpl.details }}
+                </p>
+                <p class="text-caption-xs text-content-secondary mt-2 line-clamp-2 leading-relaxed">
+                  {{ tpl.description }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Footer apply button -->
+            <div class="p-3.5 pt-0">
+              <button
+                type="button"
+                class="w-full h-8 rounded-lg text-caption-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                :class="
+                  activeTemplate?.id === tpl.id
+                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                    : 'bg-surface-subtle group-hover:bg-brand-primary group-hover:text-white text-content-primary border border-border-hairline'
+                "
+              >
+                <span>{{ activeTemplate?.id === tpl.id ? 'Currently Selected' : 'Apply Blueprint' }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="px-6 py-3 border-t border-border-hairline bg-surface-card flex items-center justify-end">
+          <button
+            type="button"
+            @click="isTemplateModalOpen = false"
+            class="h-9 px-4 rounded-lg bg-surface-subtle hover:bg-slate-200 text-content-primary text-label-sm font-semibold cursor-pointer"
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>

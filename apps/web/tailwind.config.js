@@ -13,6 +13,10 @@ export default {
           fixed: '#DBE1FF',
           'fixed-dim': '#B3C5FF',
         },
+        'brand-primary': {
+          DEFAULT: '#246BFD',
+          hover: '#1D4ED8',
+        },
         secondary: {
           DEFAULT: '#0EA5E9',
           container: '#D0E1FB',

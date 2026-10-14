@@ -23,6 +23,13 @@ const filterTabs = [
   { id: 'house', label: 'Single Family', count: 4 },
   { id: 'commercial', label: 'Commercial & Studio', count: 2 },
 ];
+
+const scrollToTemplates = () => {
+  const el = document.getElementById('template-gallery');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 </script>
 
 <template>
@@ -48,7 +55,7 @@ const filterTabs = [
           <Upload class="w-4 h-4" />
           Import CAD / DWG
         </button>
-        <button class="btn-secondary h-10">
+        <button class="btn-secondary h-10" @click="scrollToTemplates">
           <LayoutGrid class="w-4 h-4" />
           Browse Templates
         </button>

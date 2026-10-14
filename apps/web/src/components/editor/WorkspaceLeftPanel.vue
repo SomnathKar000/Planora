@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { Project, Room } from '@planora/domain';
-import { ProjectType, MeasurementUnit, DesignStyle, RoomType } from '@planora/domain';
+import type { Project, Room, RoomProgramEntry } from '@planora/domain';
+import { ProjectType, MeasurementUnit, DesignStyle, RoomType, toMillimeters } from '@planora/domain';
 import {
   Sparkles,
   Plus,
@@ -12,15 +12,21 @@ import {
   UtensilsCrossed,
   Bath,
   Check,
+  Briefcase,
+  Sun,
+  Maximize,
+  Compass,
 } from '@lucide/vue';
 
 const props = defineProps<{
   project: Project;
+  selectedRoomId?: string | null;
 }>();
 
 const emit = defineEmits<{
   (e: 'update:project', p: Project): void;
   (e: 'generate-layout'): void;
+  (e: 'select-room', room: Room | null): void;
 }>();
 
 const unitLabel = computed(() => (props.project.unit === MeasurementUnit.Feet ? 'ft' : 'm'));
@@ -56,6 +62,11 @@ const ROOM_ICONS: Record<string, any> = {
   [RoomType.Bedroom]: Bed,
   [RoomType.Kitchen]: UtensilsCrossed,
   [RoomType.Bathroom]: Bath,
+  [RoomType.HomeOffice]: Briefcase,
+  [RoomType.DiningRoom]: UtensilsCrossed,
+  [RoomType.Balcony]: Sun,
+  [RoomType.Hallway]: Compass,
+  [RoomType.Custom]: Maximize,
 };
 
 const STYLE_CARDS = [
@@ -76,27 +87,92 @@ function setStyle(s: DesignStyle) {
   });
 }
 
+function handleDimensionChange(field: 'length' | 'width', rawVal: string) {
+  const val = parseFloat(rawVal);
+  if (!val || isNaN(val) || val <= 0) return;
+
+  const newLength = field === 'length' ? val : props.project.dimensions.length;
+  const newWidth = field === 'width' ? val : props.project.dimensions.width;
+
+  const wMm = toMillimeters(newLength, props.project.unit);
+  const hMm = toMillimeters(newWidth, props.project.unit);
+
+  const updatedLayouts = props.project.layouts.map((l) => ({
+    ...l,
+    boundary: { ...l.boundary, width: wMm, height: hMm },
+  }));
+
+  emit('update:project', {
+    ...props.project,
+    dimensions: {
+      ...props.project.dimensions,
+      length: newLength,
+      width: newWidth,
+    },
+    layouts: updatedLayouts,
+  });
+}
+
 function removeRoom(roomId: string) {
   if (!activeLayout.value) return;
+  const targetRoom = activeLayout.value.rooms.find((r) => r.id === roomId);
   const newRooms = activeLayout.value.rooms.filter((r) => r.id !== roomId);
   const updatedLayout = { ...activeLayout.value, rooms: newRooms };
   const updatedLayouts = props.project.layouts.map((l) => (l.id === updatedLayout.id ? updatedLayout : l));
-  emit('update:project', { ...props.project, layouts: updatedLayouts });
+  
+  const updatedProgram = (props.project.roomProgram || []).filter((rp) => rp.name !== targetRoom?.name);
+
+  emit('update:project', {
+    ...props.project,
+    layouts: updatedLayouts,
+    roomProgram: updatedProgram,
+  });
+
+  if (props.selectedRoomId === roomId) {
+    emit('select-room', null);
+  }
 }
 
 function addRoom() {
   if (!activeLayout.value) return;
+  const b = activeLayout.value.boundary;
+  const count = activeLayout.value.rooms.length;
+
+  const roomW = Math.min(3500, Math.round(b.width * 0.35));
+  const roomH = Math.min(3000, Math.round(b.height * 0.35));
+
+  const posX = Math.min(Math.max(0, b.width - roomW), (count * 800) % Math.max(800, b.width - roomW));
+  const posY = Math.min(Math.max(0, b.height - roomH), (Math.floor(count / 2) * 800) % Math.max(800, b.height - roomH));
+
   const newRoom: Room = {
     id: `room-${Date.now()}`,
-    name: 'New Space',
+    name: `Space ${count + 1}`,
     type: RoomType.Custom,
-    boundary: { x: 0, y: 0, width: 3000, height: 2500 },
-    areaSqMm: 7500000,
+    boundary: { x: posX, y: posY, width: roomW, height: roomH },
+    areaSqMm: roomW * roomH,
     color: '#F8FAFC',
   };
+
   const updatedLayout = { ...activeLayout.value, rooms: [...activeLayout.value.rooms, newRoom] };
   const updatedLayouts = props.project.layouts.map((l) => (l.id === updatedLayout.id ? updatedLayout : l));
-  emit('update:project', { ...props.project, layouts: updatedLayouts });
+
+  const updatedProgram: RoomProgramEntry[] = [
+    ...(props.project.roomProgram || []),
+    {
+      id: `rp-${Date.now()}`,
+      type: RoomType.Custom,
+      name: newRoom.name,
+      count: 1,
+    },
+  ];
+
+  emit('update:project', {
+    ...props.project,
+    layouts: updatedLayouts,
+    roomProgram: updatedProgram,
+  });
+
+  emit('select-room', newRoom);
 }
 </script>
 
@@ -142,7 +218,7 @@ function addRoom() {
         </button>
       </div>
 
-      <!-- Dimension Inputs -->
+      <!-- Dimension Inputs (Editable Parametric Control) -->
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-caption-xs font-medium text-content-secondary mb-1">Length ({{ unitLabel }})</label>
@@ -150,10 +226,13 @@ function addRoom() {
             <input
               type="number"
               :value="project.dimensions.length"
-              disabled
-              class="w-full h-9 px-3 bg-surface-subtle rounded-lg text-body-md text-content-primary font-semibold outline-none border border-border-hairline opacity-90 cursor-not-allowed"
+              min="5"
+              max="500"
+              step="1"
+              @change="handleDimensionChange('length', ($event.target as HTMLInputElement).value)"
+              class="w-full h-9 px-3 bg-surface-subtle focus:bg-white rounded-lg text-body-md text-content-primary font-semibold outline-none border border-border-hairline focus:border-brand-primary focus:ring-1 focus:ring-brand-primary/20 transition-all"
             />
-            <span class="absolute right-2.5 text-caption-xs font-mono text-content-secondary uppercase">{{ unitLabel }}</span>
+            <span class="absolute right-2.5 text-caption-xs font-mono text-content-secondary uppercase pointer-events-none">{{ unitLabel }}</span>
           </div>
         </div>
 
@@ -163,10 +242,13 @@ function addRoom() {
             <input
               type="number"
               :value="project.dimensions.width"
-              disabled
-              class="w-full h-9 px-3 bg-surface-subtle rounded-lg text-body-md text-content-primary font-semibold outline-none border border-border-hairline opacity-90 cursor-not-allowed"
+              min="5"
+              max="500"
+              step="1"
+              @change="handleDimensionChange('width', ($event.target as HTMLInputElement).value)"
+              class="w-full h-9 px-3 bg-surface-subtle focus:bg-white rounded-lg text-body-md text-content-primary font-semibold outline-none border border-border-hairline focus:border-brand-primary focus:ring-1 focus:ring-brand-primary/20 transition-all"
             />
-            <span class="absolute right-2.5 text-caption-xs font-mono text-content-secondary uppercase">{{ unitLabel }}</span>
+            <span class="absolute right-2.5 text-caption-xs font-mono text-content-secondary uppercase pointer-events-none">{{ unitLabel }}</span>
           </div>
         </div>
       </div>
@@ -205,20 +287,34 @@ function addRoom() {
         </button>
       </div>
 
-      <!-- Room List -->
+      <!-- Room List with Interactive Selection -->
       <div class="flex flex-col gap-2 max-h-[260px] overflow-y-auto pr-1">
         <div
           v-for="room in activeLayout?.rooms || []"
           :key="room.id"
-          class="flex items-center justify-between p-2.5 rounded-xl bg-surface-subtle border border-border-hairline/80 hover:border-brand-primary/50 transition-all group"
+          @click="emit('select-room', room)"
+          class="flex items-center justify-between p-2.5 rounded-xl border transition-all cursor-pointer group"
+          :class="[
+            selectedRoomId === room.id
+              ? 'bg-blue-50/90 border-brand-primary shadow-xs ring-1 ring-brand-primary/20'
+              : 'bg-surface-subtle border-border-hairline/80 hover:border-brand-primary/50'
+          ]"
         >
           <div class="flex items-center gap-2.5">
             <GripVertical class="w-3.5 h-3.5 text-content-secondary/40 group-hover:text-content-secondary transition-colors cursor-grab" />
-            <div class="w-7 h-7 rounded-lg bg-blue-100/60 text-brand-primary flex items-center justify-center">
+            <div
+              class="w-7 h-7 rounded-lg flex items-center justify-center transition-colors"
+              :class="selectedRoomId === room.id ? 'bg-brand-primary text-white' : 'bg-blue-100/60 text-brand-primary'"
+            >
               <component :is="ROOM_ICONS[room.type] || Armchair" class="w-4 h-4" />
             </div>
             <div class="flex flex-col">
-              <span class="text-label-sm font-semibold text-content-primary leading-tight">{{ room.name }}</span>
+              <span
+                class="text-label-sm font-semibold leading-tight transition-colors"
+                :class="selectedRoomId === room.id ? 'text-brand-primary' : 'text-content-primary'"
+              >
+                {{ room.name }}
+              </span>
               <span class="text-[11px] text-content-secondary font-mono">
                 {{ Math.round(room.areaSqMm * (project.unit === MeasurementUnit.Feet ? 0.0000107639 : 0.000001)) }} {{ areaLabel }}
               </span>
@@ -227,7 +323,7 @@ function addRoom() {
 
           <button
             type="button"
-            @click="removeRoom(room.id)"
+            @click.stop="removeRoom(room.id)"
             class="w-6 h-6 rounded-md flex items-center justify-center text-content-secondary/60 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
             title="Remove room"
           >

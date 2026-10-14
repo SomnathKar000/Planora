@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute } from 'vue-router';
 import { useProjectsStore } from '@/stores/projects';
-import type { Layout, Room, Furniture } from '@planora/domain';
+import type { Project, Layout, Room, Furniture } from '@planora/domain';
 import { toMillimeters } from '@planora/domain';
 import { generateLayout } from '@planora/layout-engine';
 
@@ -152,6 +152,12 @@ function handleUpdateLayout(updatedLayout: Layout) {
   );
   store.updateProject(project.value.id, { layouts: updatedLayouts });
   syncSelectedItems(updatedLayout);
+}
+
+function handleUpdateProject(updated: Project) {
+  if (!project.value) return;
+  pushUndoState();
+  store.updateProject(project.value.id, updated);
 }
 
 function handleGenerateNewLayout() {
@@ -370,8 +376,10 @@ function handleDeleteRoom(id: string) {
           <!-- General Workspace Left Panel -->
           <WorkspaceLeftPanel
             :project="project"
-            @update:project="store.updateProject(project.id, $event)"
+            :selectedRoomId="selectedRoom?.id"
+            @update:project="handleUpdateProject"
             @generate-layout="handleGenerateNewLayout"
+            @select-room="selectedRoom = $event; selectedFurniture = null"
           />
         </div>
 
@@ -399,6 +407,8 @@ function handleDeleteRoom(id: string) {
               :unit="project.unit"
               :lengthFt="project.dimensions.length"
               :widthFt="project.dimensions.width"
+              :selectedRoomId="selectedRoom?.id"
+              :selectedFurnitureId="selectedFurniture?.id"
               @update:layout="handleUpdateLayout"
               @select-room="selectedRoom = $event; selectedFurniture = null"
               @select-furniture="selectedFurniture = $event; selectedRoom = null"

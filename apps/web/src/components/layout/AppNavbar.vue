@@ -8,7 +8,6 @@ import {
   Download,
   Triangle,
   LogOut,
-  User as UserIcon,
 } from '@lucide/vue';
 import { useAuthStore } from '@/stores/auth';
 
@@ -20,9 +19,10 @@ const showUserMenu = ref(false);
 const menuRef = ref<HTMLElement | null>(null);
 
 const navItems = [
-  { label: 'Design', route: '/projects' },
-  { label: 'Inspiration', route: '/saved' },
-  { label: 'Saved', route: '/saved' },
+  { label: 'Workspaces', route: '/projects' },
+  // Extra pages commented out for now:
+  // { label: 'Inspiration', route: '/saved' },
+  // { label: 'Saved', route: '/saved' },
 ];
 
 const isActive = (path: string) => {
@@ -148,6 +148,7 @@ onUnmounted(() => {
             </div>
           </div>
 
+          <!-- Extra page commented out for now:
           <router-link
             to="/settings"
             class="flex items-center gap-2 px-3 py-2 rounded-lg text-[#505f76] hover:text-[#121b2e] hover:bg-[#f1f3ff] transition-colors"
@@ -156,6 +157,7 @@ onUnmounted(() => {
             <UserIcon class="w-4 h-4" />
             <span>Account Settings</span>
           </router-link>
+          -->
 
           <button
             type="button"

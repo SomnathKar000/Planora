@@ -159,7 +159,7 @@ function handleSso(provider: string) {
     <header class="fixed top-0 left-0 right-0 z-50 bg-[#f9f9ff]/85 backdrop-blur-xl border-b border-[#e9edff] shadow-[0_1px_8px_rgba(0,0,0,0.03)]">
       <div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
         <div class="flex items-center gap-6">
-          <router-link to="/projects" class="flex items-center gap-2 group">
+          <router-link to="/" class="flex items-center gap-2 group">
             <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
               <LayoutGrid class="w-4 h-4 text-white" />
             </div>
@@ -171,7 +171,7 @@ function handleSso(provider: string) {
           <div class="h-4 w-px bg-[#c2c6d8]/40 hidden sm:block"></div>
 
           <router-link
-            to="/projects"
+            to="/"
             class="hidden sm:flex items-center gap-1.5 text-[13px] font-semibold text-[#505f76] hover:text-[#121b2e] transition-colors"
           >
             <ArrowLeft class="w-4 h-4" />

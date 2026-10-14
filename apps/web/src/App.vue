@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import AppNavbar from '@/components/layout/AppNavbar.vue';
+
+const route = useRoute();
+const showNavbar = computed(() => {
+  return !['landing', 'login', 'signup'].includes(route.name as string);
+});
 </script>
 
 <template>
   <div class="min-h-screen bg-surface flex flex-col">
-    <AppNavbar />
+    <AppNavbar v-if="showNavbar" />
     <main class="flex-1">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">

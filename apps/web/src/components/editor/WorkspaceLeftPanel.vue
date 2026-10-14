@@ -284,10 +284,10 @@ function addRoom() {
       <button
         type="button"
         @click="emit('generate-layout')"
-        class="w-full h-11 bg-brand-primary hover:bg-brand-primary-hover active:bg-blue-800 text-white rounded-xl font-label-md flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer group mt-1"
+        class="w-full h-11 bg-primary hover:bg-primary-hover active:bg-blue-800 text-white rounded-xl font-semibold text-body-md flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer group mt-1"
       >
-        <Sparkles class="w-4 h-4 group-hover:rotate-12 transition-transform" />
-        <span>Generate New Layout</span>
+        <Sparkles class="w-4 h-4 group-hover:rotate-12 transition-transform shrink-0" />
+        <span class="font-bold tracking-tight text-white">Generate New Layout</span>
       </button>
     </div>
   </aside>

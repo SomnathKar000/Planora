@@ -17,6 +17,15 @@ import {
   ProjectController,
   registerProjectRoutes,
 } from './modules/projects/index.js';
+import {
+  StagingService,
+  StagingController,
+  registerStagingRoutes,
+  QuotaManager,
+  MockImageEditProvider,
+  ReplicateProvider,
+  type IImageEditProvider,
+} from './modules/staging/index.js';
 import { PrismaProjectRepository } from './modules/projects/project.repository.prisma.js';
 import { prisma } from './lib/prisma.js';
 
@@ -25,7 +34,7 @@ export function createApp() {
 
   // ── Global Middleware ────────────────────────────────────────
   app.use(cors({ origin: config.cors.origin }));
-  app.use(express.json());
+  app.use(express.json({ limit: '15mb' }));
   app.use(requestLogger);
 
   // ── Dependency Wiring ───────────────────────────────────────
@@ -37,6 +46,22 @@ export function createApp() {
 
   const projectService = new ProjectService(projectRepo);
   const projectController = new ProjectController(projectService);
+
+  // Staging & AI Image Inpainting Service
+  const imageProvider: IImageEditProvider = config.ai.replicateApiToken
+    ? new ReplicateProvider(
+        config.ai.replicateApiToken,
+        config.ai.stagingModel
+      )
+    : new MockImageEditProvider();
+
+  const quotaManager = new QuotaManager({
+    maxRequestsPerHour: config.ai.maxRequestsPerHour,
+    maxImageUploadBytes: config.ai.maxImageUploadBytes,
+  });
+
+  const stagingService = new StagingService(projectRepo, imageProvider, quotaManager);
+  const stagingController = new StagingController(stagingService);
 
   if (usePrisma) {
     console.log('📦 Using PostgreSQL (Prisma) storage');
@@ -55,11 +80,17 @@ export function createApp() {
   registerProjectRoutes(projectRouter, projectController);
   apiRouter.use('/projects', projectRouter);
 
+  // Staging & AI Inpainting
+  const stagingRouter = Router();
+  registerStagingRoutes(stagingRouter, stagingController);
+  apiRouter.use('/staging', stagingRouter);
+
   // Mount all API routes under /api prefix
   app.use(config.api.prefix, apiRouter);
 
   // ── Error Handling (must be last) ───────────────────────────
   app.use(errorHandler);
 
-  return { app, projectRepo, projectService };
+  return { app, projectRepo, projectService, stagingService };
 }
+

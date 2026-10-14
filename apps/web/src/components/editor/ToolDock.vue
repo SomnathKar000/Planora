@@ -51,15 +51,15 @@ const tools: ToolItem[] = [
       :key="t.id"
       type="button"
       @click="handleClick(t.id)"
-      class="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl transition-all cursor-pointer"
+      class="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0"
       :class="[
         activeTool === t.id
           ? 'bg-blue-50 text-brand-primary font-bold shadow-2xs'
           : 'text-content-secondary hover:text-content-primary hover:bg-slate-100/70'
       ]"
     >
-      <component :is="t.icon" class="w-4 h-4" />
-      <span class="text-[11px] leading-tight">{{ t.label }}</span>
+      <component :is="t.icon" class="w-4 h-4 shrink-0" />
+      <span class="text-[11px] leading-tight font-medium whitespace-nowrap">{{ t.label }}</span>
     </button>
   </div>
 </template>

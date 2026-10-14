@@ -15,11 +15,14 @@ import WorkspaceLeftPanel from '@/components/editor/WorkspaceLeftPanel.vue';
 import FurnitureCatalogModal, { type CatalogFurnitureItem } from '@/components/editor/FurnitureCatalogModal.vue';
 import ObjectInspector from '@/components/editor/ObjectInspector.vue';
 import ExportModal from '@/components/editor/ExportModal.vue';
+import StagingWorkspaceModal from '@/components/staging/StagingWorkspaceModal.vue';
 
 import {
   History,
   CheckCircle2,
   FolderOpen,
+  Sparkles,
+  ArrowLeft,
 } from '@lucide/vue';
 
 const route = useRoute();
@@ -32,6 +35,7 @@ const viewMode = ref<ViewMode>('2d');
 const isCompareOpen = ref(false);
 const isCatalogOpen = ref(false);
 const isExportOpen = ref(false);
+const isStagingOpen = ref(false);
 const screenshotDataUrl = ref<string>('');
 const threeViewportRef = ref<InstanceType<typeof ThreeViewport> | null>(null);
 const selectedRoom = ref<Room | null>(null);
@@ -196,6 +200,22 @@ function handleDownload() {
   isExportOpen.value = true;
 }
 
+function handleOpenStaging() {
+  if (!project.value) return;
+  if (threeViewportRef.value) {
+    try {
+      screenshotDataUrl.value = threeViewportRef.value.captureScreenshot();
+    } catch {
+      screenshotDataUrl.value = '';
+    }
+  }
+  isStagingOpen.value = true;
+}
+
+function handleApplyStagedLayout(stagedLayout: Layout) {
+  handleUpdateLayout(stagedLayout);
+}
+
 // ── Furniture Catalog Insertion ──────────────────────────────────
 function handleAddCatalogFurniture(item: CatalogFurnitureItem) {
   if (!activeLayout.value || !project.value) return;
@@ -305,6 +325,15 @@ function handleDeleteRoom(id: string) {
         </div>
 
         <div class="flex items-center gap-3">
+          <button
+            type="button"
+            @click="handleOpenStaging"
+            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-brand-primary to-indigo-600 hover:from-brand-primary-hover hover:to-indigo-700 text-white text-caption-xs font-bold shadow-xs transition-all cursor-pointer whitespace-nowrap"
+          >
+            <Sparkles class="w-3.5 h-3.5 text-amber-300" />
+            <span>Staging & AI Inpainting</span>
+          </button>
+          <span class="w-px h-3.5 bg-border-hairline" />
           <span class="inline-flex items-center gap-1 text-content-secondary text-caption-xs font-medium">
             <History class="w-3.5 h-3.5" />
             <span>{{ canUndo ? `${undoStack.length} edits in session` : 'Clean canvas' }}</span>
@@ -358,6 +387,7 @@ function handleDeleteRoom(id: string) {
             @auto-arrange="handleAutoArrange"
             @clear="handleClear"
             @download="handleDownload"
+            @open-staging="handleOpenStaging"
           />
 
           <!-- Viewport Switching (2D Floor Plan vs Full 3D vs Walkthrough) -->
@@ -431,6 +461,16 @@ function handleDeleteRoom(id: string) {
       :screenshotDataUrl="screenshotDataUrl"
       @close="isExportOpen = false"
     />
+
+    <!-- Phase 8: Procedural Staging & AI Inpainting Workspace Modal -->
+    <StagingWorkspaceModal
+      v-if="isStagingOpen"
+      :project="project"
+      :layout="activeLayout"
+      :initialScreenshot="screenshotDataUrl"
+      @close="isStagingOpen = false"
+      @apply-layout="handleApplyStagedLayout"
+    />
   </div>
 
   <!-- Empty / Not Found State -->
@@ -442,9 +482,10 @@ function handleDeleteRoom(id: string) {
     </p>
     <router-link
       to="/projects"
-      class="px-5 py-2.5 rounded-xl bg-brand-primary text-white font-label-md shadow-md hover:bg-brand-primary-hover transition-colors"
+      class="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-primary hover:bg-primary-hover active:bg-blue-800 text-white font-semibold text-body-md shadow-md hover:shadow-lg transition-all cursor-pointer group"
     >
-      Back to Projects
+      <ArrowLeft class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform shrink-0 text-white" />
+      <span class="font-bold tracking-tight text-white">Back to Projects</span>
     </router-link>
   </div>
 </template>

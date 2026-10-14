@@ -250,10 +250,10 @@ function showSuccessToast() {
             type="button"
             @click="handleExportPdf"
             :disabled="isExporting"
-            class="w-full py-3 rounded-xl bg-brand-primary hover:bg-brand-primary-hover text-white font-label-md font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+            class="w-full py-3 rounded-xl bg-primary hover:bg-primary-hover active:bg-blue-800 text-white font-semibold text-body-md shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
           >
-            <Download class="w-4 h-4" />
-            <span>{{ isExporting ? 'Generating PDF Blueprint...' : 'Download Blueprint PDF' }}</span>
+            <Download class="w-4 h-4 shrink-0" />
+            <span class="font-bold tracking-tight text-white">{{ isExporting ? 'Generating PDF Blueprint...' : 'Download Blueprint PDF' }}</span>
           </button>
         </div>
 
@@ -275,10 +275,10 @@ function showSuccessToast() {
           <button
             type="button"
             @click="handleExportSvg"
-            class="w-full py-3 rounded-xl bg-brand-primary hover:bg-brand-primary-hover text-white font-label-md font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+            class="w-full py-3 rounded-xl bg-primary hover:bg-primary-hover active:bg-blue-800 text-white font-semibold text-body-md shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
-            <Download class="w-4 h-4" />
-            <span>Download Vector SVG (.svg)</span>
+            <Download class="w-4 h-4 shrink-0" />
+            <span class="font-bold tracking-tight text-white">Download Vector SVG (.svg)</span>
           </button>
         </div>
 
@@ -305,10 +305,10 @@ function showSuccessToast() {
             type="button"
             @click="handleExportPng"
             :disabled="!screenshotDataUrl"
-            class="w-full py-3 rounded-xl bg-brand-primary hover:bg-brand-primary-hover text-white font-label-md font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+            class="w-full py-3 rounded-xl bg-primary hover:bg-primary-hover active:bg-blue-800 text-white font-semibold text-body-md shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
           >
-            <Download class="w-4 h-4" />
-            <span>Download 3D Render PNG</span>
+            <Download class="w-4 h-4 shrink-0" />
+            <span class="font-bold tracking-tight text-white">Download 3D Render PNG</span>
           </button>
         </div>
 
@@ -323,10 +323,10 @@ function showSuccessToast() {
           <button
             type="button"
             @click="handleExportJson"
-            class="w-full py-3 rounded-xl bg-brand-primary hover:bg-brand-primary-hover text-white font-label-md font-bold shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+            class="w-full py-3 rounded-xl bg-primary hover:bg-primary-hover active:bg-blue-800 text-white font-semibold text-body-md shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
-            <Download class="w-4 h-4" />
-            <span>Download Canonical JSON</span>
+            <Download class="w-4 h-4 shrink-0" />
+            <span class="font-bold tracking-tight text-white">Download Canonical JSON</span>
           </button>
         </div>
       </div>
